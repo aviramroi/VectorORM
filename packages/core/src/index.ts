@@ -14,3 +14,15 @@ export type {
   HorizontalFieldKey,
   StructuralFieldKey
 } from './metadata';
+
+// Filters
+export type {
+  FilterOperator,
+  FilterCondition,
+  AndFilter,
+  OrFilter,
+  UniversalFilter,
+  ShorthandFilter
+} from './filters';
+
+export { FilterTranslator } from './filters';
