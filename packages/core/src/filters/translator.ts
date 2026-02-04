@@ -100,9 +100,15 @@ export class FilterTranslator {
    * Convert shorthand format to standard.
    */
   private static fromShorthand(shorthand: ShorthandFilter): UniversalFilter {
+    const entries = Object.entries(shorthand);
+
+    if (entries.length === 0) {
+      throw new Error('Cannot convert empty shorthand filter object');
+    }
+
     const conditions: FilterCondition[] = [];
 
-    for (const [key, value] of Object.entries(shorthand)) {
+    for (const [key, value] of entries) {
       // Parse field__op syntax
       let field: string;
       let op: FilterOperator;
@@ -111,7 +117,13 @@ export class FilterTranslator {
         // Has operator suffix
         const lastIndex = key.lastIndexOf('__');
         field = key.substring(0, lastIndex);
-        op = key.substring(lastIndex + 2) as FilterOperator;
+        const extractedOp = key.substring(lastIndex + 2);
+
+        if (!VALID_OPERATORS.includes(extractedOp as FilterOperator)) {
+          throw new Error(`Invalid filter operator in shorthand: ${extractedOp}`);
+        }
+
+        op = extractedOp as FilterOperator;
       } else {
         // Implicit eq
         field = key;

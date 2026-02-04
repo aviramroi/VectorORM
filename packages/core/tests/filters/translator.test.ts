@@ -63,6 +63,39 @@ describe('FilterTranslator', () => {
       const normalized = FilterTranslator.normalize(filter);
       expect(normalized).toEqual(filter);
     });
+
+    it('should handle nested compound filters', () => {
+      const filter: UniversalFilter = {
+        and: [
+          {
+            or: [
+              { field: 'region', op: 'eq', value: 'ny' },
+              { field: 'region', op: 'eq', value: 'ca' }
+            ]
+          },
+          { field: 'year', op: 'gte', value: 2023 }
+        ]
+      };
+
+      const normalized = FilterTranslator.normalize(filter);
+      expect(normalized).toEqual(filter);
+    });
+
+    it('should reject invalid operator in shorthand', () => {
+      const shorthand = { year__invalid: 2023 };
+
+      expect(() => FilterTranslator.normalize(shorthand)).toThrow(
+        'Invalid filter operator in shorthand: invalid'
+      );
+    });
+
+    it('should reject empty shorthand object', () => {
+      const shorthand = {};
+
+      expect(() => FilterTranslator.normalize(shorthand)).toThrow(
+        'Cannot convert empty shorthand filter object'
+      );
+    });
   });
 
   describe('validate', () => {
