@@ -1,16 +1,12 @@
-// Types
-export type { VectorRecord, SearchResult } from './types';
-
-// Metadata
 export {
   METADATA_PREFIXES,
   VerticalFields,
   HorizontalFields,
   StructuralFields
-} from './metadata';
+} from './constants';
 
 export type {
   VerticalFieldKey,
   HorizontalFieldKey,
   StructuralFieldKey
-} from './metadata';
+} from './fields';
