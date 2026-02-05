@@ -69,8 +69,12 @@ export interface SearchOptions {
   /** Number of results to return */
   topK: number;
 
-  /** Optional adapter-specific filter (already translated) */
-  filter?: any;
+  /**
+   * Optional universal filter for the search.
+   * This is NOT yet translated - adapters will translate it to their native format.
+   * See VectorDBAdapter.translateFilter() for translation logic.
+   */
+  filter?: UniversalFilter;
 
   /** Whether to include embedding vectors in results */
   includeEmbeddings?: boolean;
@@ -81,6 +85,21 @@ export interface SearchOptions {
  *
  * Used for organizing search results by vertical (document)
  * or horizontal (theme) dimensions.
+ *
+ * **How Map keys are determined:**
+ * - Vertical: Keys are extracted from the `__v_doc_id` field in record metadata
+ * - Horizontal: Keys are extracted from the `__h_theme` field in record metadata
+ *
+ * **Handling missing metadata:**
+ * - If a record is missing `__v_doc_id`, it will NOT appear in the vertical Map
+ * - If a record is missing `__h_theme`, it will NOT appear in the horizontal Map
+ * - Records can be excluded from both Maps if they lack the required metadata fields
+ *
+ * **Grouping behavior:**
+ * - Each record appears in AT MOST ONE group per dimension (based on its metadata value)
+ * - A record with `__v_doc_id: "doc1"` will appear in `vertical.get("doc1")`
+ * - A record with `__h_theme: "legal"` will appear in `horizontal.get("legal")`
+ * - Records cannot appear in multiple groups within the same dimension
  */
 export interface GroupedResults {
   /** Records grouped by document ID (__v_doc_id) */
