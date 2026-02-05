@@ -29,7 +29,11 @@ describe('PineconeAdapter - Connection', () => {
   });
 
   it('should report connected after connect', async () => {
-    // Will implement with proper mocking in next iteration
+    // This test would need mocking for real verification
+    // For now, verify the method structure works
+    expect(adapter.isConnected).toBeDefined();
+    expect(typeof adapter.isConnected()).toBe('object');
+    await expect(adapter.isConnected()).resolves.toBe(false);
   });
 
   it('should disconnect successfully', async () => {

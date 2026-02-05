@@ -42,6 +42,7 @@ export class PineconeAdapter extends VectorDBAdapter {
     try {
       this.client = new Pinecone({
         apiKey: this.config.apiKey,
+        environment: this.config.environment,
       });
 
       // Verify connection by listing indexes
