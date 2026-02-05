@@ -27,3 +27,7 @@ export type {
 } from './filters';
 
 export { FilterTranslator } from './filters';
+
+// Adapters
+export { VectorDBAdapter } from './adapters';
+export type { CollectionStats, MetadataUpdate, DistanceMetric } from './adapters';
