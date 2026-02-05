@@ -44,3 +44,6 @@ export { FilterBuilder, RAGQueryComposer } from './query';
 
 // Embedders
 export { Embedder } from './embedders';
+
+// LLM
+export * from './llm';
