@@ -65,6 +65,25 @@ describe('LLMClient', () => {
       expect(results.length).toBe(3);
       expect(results.every((r) => r === 'Response')).toBe(true);
     });
+
+    it('should throw error for invalid JSON in generateJSON', async () => {
+      const llm = new MockLLM();
+      llm.setResponse('not valid json');
+
+      await expect(llm.generateJSON('Generate data')).rejects.toThrow(
+        'Failed to parse mock response as JSON'
+      );
+    });
+
+    it('should handle empty batch array', async () => {
+      const llm = new MockLLM();
+      llm.setResponse('Response');
+
+      const results = await llm.generateBatch([]);
+
+      expect(results).toBeInstanceOf(Array);
+      expect(results.length).toBe(0);
+    });
   });
 
   describe('LLMClient Properties', () => {
