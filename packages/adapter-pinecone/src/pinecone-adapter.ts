@@ -39,15 +39,27 @@ export class PineconeAdapter extends VectorDBAdapter {
   // ============================================================================
 
   async connect(): Promise<void> {
-    throw new Error('PineconeAdapter.connect: Not implemented');
+    try {
+      this.client = new Pinecone({
+        apiKey: this.config.apiKey,
+      });
+
+      // Verify connection by listing indexes
+      await this.client.listIndexes();
+    } catch (error) {
+      throw new Error(
+        `Pinecone connection failed: ${error instanceof Error ? error.message : String(error)}`,
+        { cause: error }
+      );
+    }
   }
 
   async disconnect(): Promise<void> {
-    throw new Error('PineconeAdapter.disconnect: Not implemented');
+    this.client = null;
   }
 
   async isConnected(): Promise<boolean> {
-    throw new Error('PineconeAdapter.isConnected: Not implemented');
+    return this.client !== null;
   }
 
   // ============================================================================
