@@ -39,3 +39,6 @@ export type {
   SearchOptions,
   GroupedResults
 } from './query';
+
+// Embedders
+export { Embedder } from './embedders';
