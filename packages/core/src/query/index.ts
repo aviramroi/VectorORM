@@ -12,3 +12,4 @@ export type {
 } from './types';
 
 export { FilterBuilder } from './filter-builder';
+export { RAGQueryComposer } from './rag-query-composer';

@@ -40,7 +40,7 @@ export type {
   GroupedResults
 } from './query';
 
-export { FilterBuilder } from './query';
+export { FilterBuilder, RAGQueryComposer } from './query';
 
 // Embedders
 export { Embedder } from './embedders';
