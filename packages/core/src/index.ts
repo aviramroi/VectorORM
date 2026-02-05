@@ -31,3 +31,11 @@ export { FilterTranslator } from './filters';
 // Adapters
 export { VectorDBAdapter } from './adapters';
 export type { CollectionStats, MetadataUpdate, DistanceMetric } from './adapters';
+
+// Query
+export type {
+  RetrievalParams,
+  RetrievalResult,
+  SearchOptions,
+  GroupedResults
+} from './query';
