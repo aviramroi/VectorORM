@@ -7,6 +7,7 @@ import {
   type MetadataUpdate,
   type DistanceMetric,
 } from '@glyph/core';
+import { Pinecone } from '@pinecone-database/pinecone';
 import type { PineconeConfig } from './types.js';
 
 /**
@@ -17,7 +18,7 @@ import type { PineconeConfig } from './types.js';
  */
 export class PineconeAdapter extends VectorDBAdapter {
   private config: PineconeConfig;
-  private client: any; // Will be typed as Pinecone client once imported
+  private client: Pinecone | null = null;
 
   constructor(config: PineconeConfig) {
     super();
