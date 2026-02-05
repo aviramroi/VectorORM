@@ -1,7 +1,7 @@
 /**
  * Query Composition Layer
  *
- * Exports all query-related types and interfaces.
+ * Exports all query-related types, interfaces, and utilities.
  */
 
 export type {
@@ -10,3 +10,5 @@ export type {
   SearchOptions,
   GroupedResults,
 } from './types';
+
+export { FilterBuilder } from './filter-builder';

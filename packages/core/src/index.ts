@@ -40,5 +40,7 @@ export type {
   GroupedResults
 } from './query';
 
+export { FilterBuilder } from './query';
+
 // Embedders
 export { Embedder } from './embedders';
