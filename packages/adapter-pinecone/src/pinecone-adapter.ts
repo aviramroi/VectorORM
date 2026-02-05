@@ -136,7 +136,61 @@ export class PineconeAdapter extends VectorDBAdapter {
   // ============================================================================
 
   translateFilter(filter: UniversalFilter): any {
-    throw new Error('PineconeAdapter.translateFilter: Not implemented');
+    // Handle compound AND filter
+    if ('and' in filter) {
+      const conditions = filter.and;
+
+      // Check for nested compound filters (not supported yet)
+      for (const condition of conditions) {
+        if ('and' in condition || 'or' in condition) {
+          throw new Error(
+            'Nested compound filters not yet supported in PineconeAdapter. See TECH_DEBT.md',
+            { cause: { filter } }
+          );
+        }
+      }
+
+      return {
+        $and: conditions.map((c) => this.translateFilter(c)),
+      };
+    }
+
+    // Handle compound OR filter (not supported)
+    if ('or' in filter) {
+      throw new Error(
+        'OR filters not yet supported in PineconeAdapter. See TECH_DEBT.md',
+        { cause: { filter } }
+      );
+    }
+
+    // Handle basic filter condition
+    const { field, op, value } = filter as any;
+
+    // Operator mapping
+    const operatorMap: Record<string, string> = {
+      eq: '$eq',
+      ne: '$ne',
+      gt: '$gt',
+      gte: '$gte',
+      lt: '$lt',
+      lte: '$lte',
+      in: '$in',
+      nin: '$nin',
+    };
+
+    const pineconeOp = operatorMap[op];
+    if (!pineconeOp) {
+      throw new Error(
+        `Unsupported filter operator: ${op}`,
+        { cause: { filter } }
+      );
+    }
+
+    return {
+      [field]: {
+        [pineconeOp]: value,
+      },
+    };
   }
 
   // ============================================================================
