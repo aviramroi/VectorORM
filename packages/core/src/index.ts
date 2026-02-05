@@ -47,3 +47,6 @@ export { Embedder } from './embedders';
 
 // LLM
 export * from './llm';
+
+// Enrichment
+export * from './enrichment';
