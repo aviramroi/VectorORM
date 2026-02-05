@@ -114,4 +114,43 @@ describe('MetadataBuilder', () => {
       author: 'John'
     });
   });
+
+  it('should return truly immutable copy on build()', () => {
+    const builder = new MetadataBuilder()
+      .vertical({ doc_id: 'doc123' })
+      .horizontal({ theme: 'pricing' });
+
+    const metadata1 = builder.build();
+
+    // Modify the returned object
+    metadata1.custom_field = 'should not affect builder';
+    metadata1[VerticalFields.DOC_ID] = 'modified';
+    delete metadata1[HorizontalFields.THEME];
+
+    // Build again and verify builder state unchanged
+    const metadata2 = builder.build();
+
+    expect(metadata2).toEqual({
+      [VerticalFields.DOC_ID]: 'doc123',
+      [HorizontalFields.THEME]: 'pricing'
+    });
+    expect(metadata2).not.toHaveProperty('custom_field');
+  });
+
+  it('should handle empty object edge cases', () => {
+    // Test calling build() with no metadata added
+    const emptyBuilder = new MetadataBuilder();
+    const emptyMetadata = emptyBuilder.build();
+    expect(emptyMetadata).toEqual({});
+
+    // Test passing empty objects to builder methods
+    const metadata = new MetadataBuilder()
+      .vertical({})
+      .horizontal({})
+      .structural({})
+      .custom({})
+      .build();
+
+    expect(metadata).toEqual({});
+  });
 });

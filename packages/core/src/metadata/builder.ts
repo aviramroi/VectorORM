@@ -1,20 +1,6 @@
 import { METADATA_PREFIXES } from './constants';
 
 /**
- * Helper to convert snake_case to camelCase
- */
-function snakeToCamel(str: string): string {
-  return str.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase());
-}
-
-/**
- * Helper to convert camelCase to snake_case
- */
-function camelToSnake(str: string): string {
-  return str.replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`);
-}
-
-/**
  * MetadataBuilder provides a fluent API for constructing metadata objects
  * with proper V/H/S prefixes and type safety.
  *
