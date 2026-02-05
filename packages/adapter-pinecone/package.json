@@ -24,7 +24,7 @@
     "test:integration": "vitest run --config vitest.integration.config.ts"
   },
   "dependencies": {
-    "@glyph/core": "*",
+    "@glyph/core": "workspace:*",
     "@pinecone-database/pinecone": "^2.0.0"
   },
   "devDependencies": {
