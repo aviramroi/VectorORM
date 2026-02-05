@@ -42,7 +42,6 @@ export class PineconeAdapter extends VectorDBAdapter {
     try {
       this.client = new Pinecone({
         apiKey: this.config.apiKey,
-        environment: this.config.environment,
       });
 
       // Verify connection by listing indexes
@@ -70,21 +69,87 @@ export class PineconeAdapter extends VectorDBAdapter {
   async createCollection(
     name: string,
     dimension: number,
-    metric?: DistanceMetric
+    metric: DistanceMetric = 'cosine'
   ): Promise<void> {
-    throw new Error('PineconeAdapter.createCollection: Not implemented');
+    if (!this.client) {
+      throw new Error('Not connected. Call connect() first.');
+    }
+
+    try {
+      // Map our metric to Pinecone metric
+      const pineconeMetric = metric === 'dotProduct' ? 'dotproduct' : metric;
+
+      await this.client.createIndex({
+        name,
+        dimension,
+        metric: pineconeMetric,
+        spec: {
+          serverless: {
+            cloud: 'aws',
+            region: 'us-east-1',
+          },
+        },
+      });
+    } catch (error) {
+      throw new Error(
+        `Failed to create Pinecone index ${name}: ${error instanceof Error ? error.message : String(error)}`,
+        { cause: error }
+      );
+    }
   }
 
   async deleteCollection(name: string): Promise<void> {
-    throw new Error('PineconeAdapter.deleteCollection: Not implemented');
+    if (!this.client) {
+      throw new Error('Not connected. Call connect() first.');
+    }
+
+    try {
+      await this.client.deleteIndex(name);
+    } catch (error) {
+      throw new Error(
+        `Failed to delete Pinecone index ${name}: ${error instanceof Error ? error.message : String(error)}`,
+        { cause: error }
+      );
+    }
   }
 
   async collectionExists(name: string): Promise<boolean> {
-    throw new Error('PineconeAdapter.collectionExists: Not implemented');
+    if (!this.client) {
+      throw new Error('Not connected. Call connect() first.');
+    }
+
+    try {
+      const indexes = await this.client.listIndexes();
+      return indexes.indexes?.some((idx) => idx.name === name) ?? false;
+    } catch (error) {
+      throw new Error(
+        `Failed to check if Pinecone index ${name} exists: ${error instanceof Error ? error.message : String(error)}`,
+        { cause: error }
+      );
+    }
   }
 
   async getCollectionStats(name: string): Promise<CollectionStats> {
-    throw new Error('PineconeAdapter.getCollectionStats: Not implemented');
+    if (!this.client) {
+      throw new Error('Not connected. Call connect() first.');
+    }
+
+    try {
+      const index = this.client.index(name);
+      const stats = await index.describeIndexStats();
+
+      return {
+        vectorCount: stats.totalRecordCount ?? 0,
+        dimension: stats.dimension ?? 0,
+        metric: 'cosine', // Pinecone doesn't return metric in stats, default to cosine
+        ...stats,
+      };
+    } catch (error) {
+      throw new Error(
+        `Failed to get Pinecone index stats for ${name}: ${error instanceof Error ? error.message : String(error)}`,
+        { cause: error }
+      );
+    }
   }
 
   // ============================================================================
@@ -92,15 +157,65 @@ export class PineconeAdapter extends VectorDBAdapter {
   // ============================================================================
 
   async upsert(collection: string, records: VectorRecord[]): Promise<void> {
-    throw new Error('PineconeAdapter.upsert: Not implemented');
+    if (!this.client) {
+      throw new Error('Not connected. Call connect() first.');
+    }
+
+    try {
+      const index = this.client.index(collection);
+
+      // Convert VectorRecord[] to Pinecone format
+      const pineconeRecords = records.map((record) => ({
+        id: record.id,
+        values: record.embedding,
+        metadata: record.metadata,
+      }));
+
+      await index.upsert(pineconeRecords);
+    } catch (error) {
+      throw new Error(
+        `Failed to upsert vectors to Pinecone index ${collection}: ${error instanceof Error ? error.message : String(error)}`,
+        { cause: error }
+      );
+    }
   }
 
   async fetch(collection: string, ids: string[]): Promise<VectorRecord[]> {
-    throw new Error('PineconeAdapter.fetch: Not implemented');
+    if (!this.client) {
+      throw new Error('Not connected. Call connect() first.');
+    }
+
+    try {
+      const index = this.client.index(collection);
+      const response = await index.fetch(ids);
+
+      return Object.entries(response.records || {}).map(([id, record]) => ({
+        id,
+        embedding: record.values || [],
+        metadata: record.metadata || {},
+      }));
+    } catch (error) {
+      throw new Error(
+        `Failed to fetch vectors from Pinecone index ${collection}: ${error instanceof Error ? error.message : String(error)}`,
+        { cause: error }
+      );
+    }
   }
 
   async delete(collection: string, ids: string[]): Promise<void> {
-    throw new Error('PineconeAdapter.delete: Not implemented');
+    if (!this.client) {
+      throw new Error('Not connected. Call connect() first.');
+    }
+
+    try {
+      const index = this.client.index(collection);
+      await index.deleteMany(ids);
+    } catch (error) {
+      throw new Error(
+        `Failed to delete vectors from Pinecone index ${collection}: ${error instanceof Error ? error.message : String(error)}`,
+        { cause: error }
+      );
+    }
   }
 
   // ============================================================================
@@ -111,7 +226,26 @@ export class PineconeAdapter extends VectorDBAdapter {
     collection: string,
     updates: MetadataUpdate[]
   ): Promise<void> {
-    throw new Error('PineconeAdapter.updateMetadata: Not implemented');
+    if (!this.client) {
+      throw new Error('Not connected. Call connect() first.');
+    }
+
+    try {
+      const index = this.client.index(collection);
+
+      // Pinecone supports partial metadata updates via update()
+      for (const update of updates) {
+        await index.update({
+          id: update.id,
+          metadata: update.metadata,
+        });
+      }
+    } catch (error) {
+      throw new Error(
+        `Failed to update metadata in Pinecone index ${collection}: ${error instanceof Error ? error.message : String(error)}`,
+        { cause: error }
+      );
+    }
   }
 
   // ============================================================================
@@ -128,7 +262,39 @@ export class PineconeAdapter extends VectorDBAdapter {
       includeValues?: boolean;
     }
   ): Promise<SearchResult> {
-    throw new Error('PineconeAdapter.search: Not implemented');
+    if (!this.client) {
+      throw new Error('Not connected. Call connect() first.');
+    }
+
+    try {
+      const index = this.client.index(collection);
+
+      const pineconeFilter = options?.filter
+        ? this.translateFilter(options.filter)
+        : undefined;
+
+      const response = await index.query({
+        vector: queryVector,
+        topK: options?.topK || 10,
+        filter: pineconeFilter,
+        includeMetadata: options?.includeMetadata !== false,
+        includeValues: options?.includeValues || false,
+      });
+
+      return {
+        records: (response.matches || []).map((match) => ({
+          id: match.id,
+          embedding: match.values || [],
+          metadata: match.metadata || {},
+          score: match.score,
+        })),
+      };
+    } catch (error) {
+      throw new Error(
+        `Failed to search Pinecone index ${collection}: ${error instanceof Error ? error.message : String(error)}`,
+        { cause: error }
+      );
+    }
   }
 
   // ============================================================================
@@ -204,7 +370,49 @@ export class PineconeAdapter extends VectorDBAdapter {
       filter?: UniversalFilter;
     }
   ): AsyncIterableIterator<VectorRecord[]> {
-    throw new Error('PineconeAdapter.iterate: Not implemented');
+    if (!this.client) {
+      throw new Error('Not connected. Call connect() first.');
+    }
+
+    try {
+      const index = this.client.index(collection);
+      const batchSize = options?.batchSize || 100;
+      const pineconeFilter = options?.filter
+        ? this.translateFilter(options.filter)
+        : undefined;
+
+      // Pinecone uses pagination with tokens
+      let paginationToken: string | undefined = undefined;
+      let hasMore = true;
+
+      while (hasMore) {
+        const response = await index.listPaginated({
+          limit: batchSize,
+          paginationToken,
+          ...(pineconeFilter && { filter: pineconeFilter }),
+        });
+
+        if (response.vectors && response.vectors.length > 0) {
+          // Fetch full records with embeddings
+          const ids = response.vectors
+            .map((v) => v.id)
+            .filter((id): id is string => id !== undefined);
+          if (ids.length > 0) {
+            const records = await this.fetch(collection, ids);
+            yield records;
+          }
+        }
+
+        // Check for more pages
+        paginationToken = response.pagination?.next;
+        hasMore = !!paginationToken;
+      }
+    } catch (error) {
+      throw new Error(
+        `Failed to iterate Pinecone index ${collection}: ${error instanceof Error ? error.message : String(error)}`,
+        { cause: error }
+      );
+    }
   }
 
   // ============================================================================
