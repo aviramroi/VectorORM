@@ -10,3 +10,5 @@ export type {
   HorizontalFieldKey,
   StructuralFieldKey
 } from './fields';
+
+export { MetadataBuilder } from './builder';

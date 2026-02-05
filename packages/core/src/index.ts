@@ -6,7 +6,8 @@ export {
   METADATA_PREFIXES,
   VerticalFields,
   HorizontalFields,
-  StructuralFields
+  StructuralFields,
+  MetadataBuilder
 } from './metadata';
 
 export type {
