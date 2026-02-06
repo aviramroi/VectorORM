@@ -7,3 +7,4 @@
  */
 
 export type { ThemeClassification, ThemeClassifier } from './theme-classifier';
+export * from './keyword-classifier';
