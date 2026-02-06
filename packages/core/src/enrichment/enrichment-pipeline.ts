@@ -17,6 +17,7 @@
 import type { VectorDBAdapter } from '../adapters';
 import type { VectorRecord } from '../types';
 import type { MetadataUpdate } from '../adapters/types';
+import type { UniversalFilter } from '../filters/types';
 import type {
   EnrichmentStats,
   VerticalEnrichmentConfig,
@@ -577,32 +578,360 @@ export class EnrichmentPipeline {
   /**
    * Enrich records with section structure.
    *
+   * Extracts section metadata from documents using either existing field mappings
+   * or automatic detection strategies (markdown, HTML, or pattern-based).
+   *
    * @param collection - Name of the collection to enrich
    * @param config - Section enrichment configuration
    * @returns Statistics about the enrichment operation
    *
-   * @throws Error with message "Not implemented yet"
+   * @example
+   * ```typescript
+   * // Use existing section field
+   * await pipeline.enrichSections('docs', {
+   *   existingField: 'section_path'
+   * });
+   *
+   * // Auto-detect sections
+   * await pipeline.enrichSections('docs', {
+   *   autoDetect: true
+   * });
+   * ```
    */
   async enrichSections(
     collection: string,
     config: SectionEnrichmentConfig
   ): Promise<EnrichmentStats> {
-    throw new Error('Not implemented yet');
+    const startTime = Date.now();
+    const stats: EnrichmentStats = {
+      recordsProcessed: 0,
+      recordsUpdated: 0,
+      recordsSkipped: 0,
+      timeMs: 0,
+      errors: [],
+    };
+
+    try {
+      await this.enrichWithSectionDetection(collection, config, stats);
+    } catch (error) {
+      stats.errors?.push(
+        `Pipeline error: ${error instanceof Error ? error.message : 'unknown error'}`
+      );
+    }
+
+    stats.timeMs = Date.now() - startTime;
+    return stats;
   }
 
   /**
    * Enrich records with all enrichment types.
    *
+   * Runs vertical, theme, and section enrichment sequentially with shared
+   * configuration. Global filters and batch sizes apply to all operations.
+   *
    * @param collection - Name of the collection to enrich
    * @param config - Combined enrichment configuration
    * @returns Statistics about the enrichment operation
    *
-   * @throws Error with message "Not implemented yet"
+   * @example
+   * ```typescript
+   * await pipeline.enrichAll('docs', {
+   *   vertical: { mapping: { tech: 'technology' } },
+   *   themes: { themes: ['innovation'], classifier },
+   *   sections: { autoDetect: true },
+   *   filter: { field: 'status', op: 'eq', value: 'pending' },
+   *   batchSize: 50
+   * });
+   * ```
    */
   async enrichAll(
     collection: string,
     config: EnrichAllConfig
   ): Promise<EnrichmentStats> {
-    throw new Error('Not implemented yet');
+    const startTime = Date.now();
+    const aggregateStats: EnrichmentStats = {
+      recordsProcessed: 0,
+      recordsUpdated: 0,
+      recordsSkipped: 0,
+      timeMs: 0,
+      errors: [],
+    };
+
+    try {
+      // Run vertical enrichment if configured
+      if (config.vertical) {
+        const verticalConfig = this.applyGlobalConfig(config.vertical, config);
+        const stats = await this.enrichVertical(collection, verticalConfig);
+        this.mergeStats(aggregateStats, stats);
+
+        // Call progress callback if provided
+        if (config.onProgress) {
+          config.onProgress(aggregateStats);
+        }
+      }
+
+      // Run theme enrichment if configured
+      if (config.themes) {
+        const themesConfig = this.applyGlobalConfig(config.themes, config);
+        const stats = await this.enrichThemes(collection, themesConfig);
+        this.mergeStats(aggregateStats, stats);
+
+        // Call progress callback if provided
+        if (config.onProgress) {
+          config.onProgress(aggregateStats);
+        }
+      }
+
+      // Run section enrichment if configured
+      if (config.sections) {
+        const sectionsConfig = this.applyGlobalConfig(config.sections, config);
+        const stats = await this.enrichSections(collection, sectionsConfig);
+        this.mergeStats(aggregateStats, stats);
+
+        // Call progress callback if provided
+        if (config.onProgress) {
+          config.onProgress(aggregateStats);
+        }
+      }
+    } catch (error) {
+      aggregateStats.errors?.push(
+        `Pipeline error: ${error instanceof Error ? error.message : 'unknown error'}`
+      );
+    }
+
+    aggregateStats.timeMs = Date.now() - startTime;
+    return aggregateStats;
+  }
+
+  /**
+   * Apply global configuration to individual enrichment configs.
+   *
+   * @param individualConfig - Configuration for a specific enrichment type
+   * @param globalConfig - Global configuration
+   * @returns Merged configuration
+   */
+  private applyGlobalConfig<T extends { filter?: UniversalFilter; batchSize?: number }>(
+    individualConfig: T,
+    globalConfig: EnrichAllConfig
+  ): T {
+    const merged = { ...individualConfig };
+
+    // Apply global filter if not overridden
+    if (globalConfig.filter && !merged.filter) {
+      merged.filter = globalConfig.filter;
+    }
+
+    // Apply global batch size if not overridden
+    if (globalConfig.batchSize && !merged.batchSize) {
+      merged.batchSize = globalConfig.batchSize;
+    }
+
+    return merged;
+  }
+
+  /**
+   * Merge stats from an enrichment operation into aggregate stats.
+   *
+   * @param aggregate - Aggregate stats to update
+   * @param stats - Stats from a single operation
+   */
+  private mergeStats(aggregate: EnrichmentStats, stats: EnrichmentStats): void {
+    aggregate.recordsProcessed += stats.recordsProcessed;
+    aggregate.recordsUpdated += stats.recordsUpdated;
+    aggregate.recordsSkipped += stats.recordsSkipped;
+
+    // Merge errors
+    if (stats.errors && stats.errors.length > 0) {
+      if (!aggregate.errors) {
+        aggregate.errors = [];
+      }
+      aggregate.errors.push(...stats.errors);
+    }
+  }
+
+  /**
+   * Enrich records using section detection.
+   *
+   * @param collection - Collection name
+   * @param config - Section enrichment configuration
+   * @param stats - Statistics object to update
+   */
+  private async enrichWithSectionDetection(
+    collection: string,
+    config: SectionEnrichmentConfig,
+    stats: EnrichmentStats
+  ): Promise<void> {
+    const batchSize = config.batchSize || 100;
+
+    for await (const batch of this.adapter.iterate(collection, {
+      batchSize,
+      filter: config.filter,
+    })) {
+      const updates: MetadataUpdate[] = [];
+
+      for (const record of batch) {
+        stats.recordsProcessed++;
+
+        try {
+          let sectionMetadata: {
+            path?: string;
+            level: number;
+            title: string;
+          } | null = null;
+
+          // Use existing field if provided
+          if (config.existingField) {
+            sectionMetadata = this.extractSectionMetadata(
+              record.metadata?.[config.existingField]
+            );
+          }
+          // Otherwise, auto-detect sections
+          else if (config.autoDetect) {
+            const text = record.text || record.metadata?.content || '';
+            if (typeof text === 'string') {
+              sectionMetadata = this.detectSections(text);
+            }
+          }
+
+          if (sectionMetadata) {
+            const metadata: Record<string, any> = {
+              __h_section_level: sectionMetadata.level,
+              __h_section_title: sectionMetadata.title,
+            };
+
+            if (sectionMetadata.path) {
+              metadata.__h_section_path = sectionMetadata.path;
+            }
+
+            updates.push({
+              id: record.id,
+              metadata,
+            });
+          } else {
+            stats.recordsSkipped++;
+          }
+        } catch (error) {
+          stats.recordsSkipped++;
+          stats.errors?.push(
+            `Error processing record ${record.id}: ${error instanceof Error ? error.message : 'unknown error'}`
+          );
+        }
+      }
+
+      // Apply updates if any
+      if (updates.length > 0) {
+        try {
+          await this.adapter.updateMetadata(collection, updates);
+          stats.recordsUpdated += updates.length;
+        } catch (error) {
+          stats.errors?.push(
+            `Error updating batch: ${error instanceof Error ? error.message : 'unknown error'}`
+          );
+        }
+      }
+    }
+  }
+
+  /**
+   * Extract section metadata from an existing field value.
+   *
+   * @param sectionPath - Section path string (e.g., "introduction/overview")
+   * @returns Section metadata or null
+   */
+  private extractSectionMetadata(
+    sectionPath: any
+  ): { path: string; level: number; title: string } | null {
+    if (!sectionPath || typeof sectionPath !== 'string') {
+      return null;
+    }
+
+    const parts = sectionPath.split('/').filter(p => p.trim() !== '');
+    if (parts.length === 0) {
+      return null;
+    }
+
+    return {
+      path: sectionPath,
+      level: parts.length,
+      title: parts[parts.length - 1],
+    };
+  }
+
+  /**
+   * Detect sections in text using heuristics.
+   *
+   * @param text - Text content to analyze
+   * @returns Section metadata or null
+   */
+  private detectSections(
+    text: string
+  ): { level: number; title: string } | null {
+    // Try markdown detection first
+    const markdown = this.detectMarkdownSections(text);
+    if (markdown) return markdown;
+
+    // Try HTML detection
+    const html = this.detectHtmlSections(text);
+    if (html) return html;
+
+    // Try pattern detection
+    const pattern = this.detectPatternSections(text);
+    if (pattern) return pattern;
+
+    // Fallback: mark as unsectioned
+    return { level: 0, title: 'unsectioned' };
+  }
+
+  /**
+   * Detect markdown headers (# Header).
+   *
+   * @param text - Text content
+   * @returns Section metadata or null
+   */
+  private detectMarkdownSections(
+    text: string
+  ): { level: number; title: string } | null {
+    const match = text.match(/^(#{1,6})\s+(.+)$/m);
+    if (match) {
+      const level = match[1].length;
+      const title = match[2].trim();
+      return { level, title };
+    }
+    return null;
+  }
+
+  /**
+   * Detect HTML headers (<h1>Header</h1>).
+   *
+   * @param text - Text content
+   * @returns Section metadata or null
+   */
+  private detectHtmlSections(
+    text: string
+  ): { level: number; title: string } | null {
+    const match = text.match(/<h([1-6])>(.+?)<\/h[1-6]>/i);
+    if (match) {
+      const level = parseInt(match[1], 10);
+      const title = match[2].trim();
+      return { level, title };
+    }
+    return null;
+  }
+
+  /**
+   * Detect sections using common patterns (SECTION: Title).
+   *
+   * @param text - Text content
+   * @returns Section metadata or null
+   */
+  private detectPatternSections(
+    text: string
+  ): { level: number; title: string } | null {
+    const match = text.match(/^SECTION:\s+(.+)$/m);
+    if (match) {
+      const title = match[1].trim();
+      return { level: 1, title };
+    }
+    return null;
   }
 }

@@ -449,17 +449,4 @@ describe('EnrichmentPipeline - Vertical Enrichment', () => {
     });
   });
 
-  describe('Stub Methods', () => {
-    it('should throw "Not implemented yet" for enrichSections', async () => {
-      await expect(
-        pipeline.enrichSections('test-collection', {})
-      ).rejects.toThrow('Not implemented yet');
-    });
-
-    it('should throw "Not implemented yet" for enrichAll', async () => {
-      await expect(
-        pipeline.enrichAll('test-collection', {})
-      ).rejects.toThrow('Not implemented yet');
-    });
-  });
 });
