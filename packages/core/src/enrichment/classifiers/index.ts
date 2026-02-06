@@ -9,3 +9,4 @@
 export type { ThemeClassification, ThemeClassifier } from './theme-classifier';
 export * from './keyword-classifier';
 export * from './zero-shot-classifier';
+export * from './embedding-classifier';
