@@ -450,15 +450,6 @@ describe('EnrichmentPipeline - Vertical Enrichment', () => {
   });
 
   describe('Stub Methods', () => {
-    it('should throw "Not implemented yet" for enrichThemes', async () => {
-      await expect(
-        pipeline.enrichThemes('test-collection', {
-          themes: ['technology'],
-          classifier: {} as any,
-        })
-      ).rejects.toThrow('Not implemented yet');
-    });
-
     it('should throw "Not implemented yet" for enrichSections', async () => {
       await expect(
         pipeline.enrichSections('test-collection', {})

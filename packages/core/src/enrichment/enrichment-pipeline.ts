@@ -381,17 +381,197 @@ export class EnrichmentPipeline {
   /**
    * Enrich records with theme classifications.
    *
+   * Uses a theme classifier to identify themes in text content and updates
+   * record metadata with theme information. Supports single and multi-theme
+   * classification with configurable confidence thresholds.
+   *
    * @param collection - Name of the collection to enrich
    * @param config - Theme enrichment configuration
    * @returns Statistics about the enrichment operation
    *
-   * @throws Error with message "Not implemented yet"
+   * @example
+   * ```typescript
+   * // Single theme classification
+   * await pipeline.enrichThemes('docs', {
+   *   themes: ['technology', 'business', 'science'],
+   *   classifier: new KeywordThemeClassifier(),
+   *   confidenceThreshold: 0.7
+   * });
+   *
+   * // Multi-theme classification
+   * await pipeline.enrichThemes('docs', {
+   *   themes: ['technology', 'business', 'science'],
+   *   classifier: new LLMThemeClassifier(),
+   *   multiTheme: true,
+   *   confidenceThreshold: 0.5
+   * });
+   * ```
    */
   async enrichThemes(
     collection: string,
     config: ThemeEnrichmentConfig
   ): Promise<EnrichmentStats> {
-    throw new Error('Not implemented yet');
+    const startTime = Date.now();
+    const stats: EnrichmentStats = {
+      recordsProcessed: 0,
+      recordsUpdated: 0,
+      recordsSkipped: 0,
+      timeMs: 0,
+      errors: [],
+    };
+
+    try {
+      await this.enrichWithThemeClassifier(collection, config, stats);
+    } catch (error) {
+      stats.errors?.push(
+        `Pipeline error: ${error instanceof Error ? error.message : 'unknown error'}`
+      );
+    }
+
+    stats.timeMs = Date.now() - startTime;
+    return stats;
+  }
+
+  /**
+   * Enrich records using theme classifier.
+   *
+   * @param collection - Collection name
+   * @param config - Theme enrichment configuration
+   * @param stats - Statistics object to update
+   */
+  private async enrichWithThemeClassifier(
+    collection: string,
+    config: ThemeEnrichmentConfig,
+    stats: EnrichmentStats
+  ): Promise<void> {
+    const batchSize = config.batchSize || 100;
+    const textField = config.textField || 'content';
+    const confidenceThreshold = config.confidenceThreshold ?? 0.5;
+    const multiTheme = config.multiTheme || false;
+
+    for await (const batch of this.adapter.iterate(collection, {
+      batchSize,
+      filter: config.filter,
+    })) {
+      // Extract texts from batch
+      const textsToClassify: string[] = [];
+      const recordsToProcess: VectorRecord[] = [];
+
+      for (const record of batch) {
+        stats.recordsProcessed++;
+
+        // Extract text from record
+        const text = record.text || record.metadata?.[textField];
+
+        if (!text || typeof text !== 'string' || text.trim() === '') {
+          stats.recordsSkipped++;
+          continue;
+        }
+
+        textsToClassify.push(text);
+        recordsToProcess.push(record);
+      }
+
+      // Skip if no valid texts to classify
+      if (textsToClassify.length === 0) {
+        continue;
+      }
+
+      // Classify batch
+      let classifications: any[];
+      try {
+        classifications = await config.classifier.classifyBatch(textsToClassify);
+      } catch (error) {
+        // If batch classification fails, try individual classification for each item
+        stats.errors?.push(
+          `Batch classification error, falling back to individual classification: ${error instanceof Error ? error.message : 'unknown error'}`
+        );
+
+        classifications = [];
+        for (let i = 0; i < textsToClassify.length; i++) {
+          try {
+            const result = await config.classifier.classify(textsToClassify[i]);
+            classifications.push(result);
+          } catch (individualError) {
+            // Push null to maintain index alignment
+            classifications.push(null);
+            stats.errors?.push(
+              `Classification error for record ${recordsToProcess[i].id}: ${individualError instanceof Error ? individualError.message : 'unknown error'}`
+            );
+          }
+        }
+      }
+
+      // Build updates
+      const updates: MetadataUpdate[] = [];
+
+      for (let i = 0; i < recordsToProcess.length; i++) {
+        const record = recordsToProcess[i];
+        const classification = classifications[i];
+
+        try {
+          // Check if classification is valid (might be error object or undefined)
+          if (!classification || typeof classification !== 'object') {
+            stats.recordsSkipped++;
+            stats.errors?.push(
+              `Invalid classification for record ${record.id}`
+            );
+            continue;
+          }
+
+          // Skip if below confidence threshold
+          if (classification.confidence < confidenceThreshold) {
+            stats.recordsSkipped++;
+            continue;
+          }
+
+          // Build metadata update
+          const metadata: Record<string, any> = {
+            __h_theme: classification.theme,
+            __h_theme_confidence: classification.confidence,
+          };
+
+          // Handle multi-theme mode
+          if (multiTheme && classification.allScores) {
+            const themes = Object.entries(classification.allScores)
+              .filter(([_, score]) => (score as number) >= confidenceThreshold)
+              .sort(([_, a], [__, b]) => (b as number) - (a as number))
+              .map(([theme, _]) => theme);
+
+            if (themes.length > 0) {
+              metadata.__h_themes = themes;
+            }
+          }
+
+          updates.push({
+            id: record.id,
+            metadata,
+          });
+        } catch (error) {
+          stats.recordsSkipped++;
+          stats.errors?.push(
+            `Error processing record ${record.id}: ${error instanceof Error ? error.message : 'unknown error'}`
+          );
+        }
+      }
+
+      // Apply updates if any
+      if (updates.length > 0) {
+        try {
+          await this.adapter.updateMetadata(collection, updates);
+          stats.recordsUpdated += updates.length;
+        } catch (error) {
+          stats.errors?.push(
+            `Error updating batch: ${error instanceof Error ? error.message : 'unknown error'}`
+          );
+        }
+      }
+
+      // Call progress callback if provided
+      if (config.onProgress) {
+        config.onProgress(stats);
+      }
+    }
   }
 
   /**
