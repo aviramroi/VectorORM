@@ -1,6 +1,9 @@
 # Git worktrees directory
 .worktrees/
 
+# Build cache
+.turbo/
+
 # Dependencies
 node_modules/
 .pnp
