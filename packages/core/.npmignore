@@ -1,0 +1,5 @@
+tests/
+*.test.ts
+tsconfig.json
+tsup.config.ts
+.turbo/

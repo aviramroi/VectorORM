@@ -1,6 +1,9 @@
 # @glyph/adapter-turbopuffer
 
-Turbopuffer adapter for Glyph vector ORM.
+[![npm](https://img.shields.io/npm/v/@glyph/adapter-turbopuffer)](https://www.npmjs.com/package/@glyph/adapter-turbopuffer)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+
+[Turbopuffer](https://turbopuffer.com/) adapter for [Glyph VectorORM](https://github.com/aviramroi/VectorORM).
 
 ## Installation
 
@@ -121,6 +124,11 @@ npm test
 npm run test:watch
 ```
 
+## Documentation
+
+- [API Guide](https://github.com/aviramroi/VectorORM/blob/main/docs/guide.md)
+- [Full Project](https://github.com/aviramroi/VectorORM)
+
 ## License
 
-MIT
+Apache-2.0

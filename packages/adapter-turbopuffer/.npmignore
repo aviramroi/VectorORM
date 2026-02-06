@@ -1,0 +1,7 @@
+tests/
+*.test.ts
+tsconfig.json
+tsup.config.ts
+vitest.*.ts
+.turbo/
+TECH_DEBT.md

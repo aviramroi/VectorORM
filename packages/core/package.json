@@ -1,7 +1,18 @@
 {
   "name": "@glyph/core",
   "version": "0.1.0",
-  "description": "Core abstractions for Glyph vectorORM",
+  "description": "Core abstractions for Glyph VectorORM — adapters, ingestion, enrichment, query, and RAGClient",
+  "author": "Aviram Roisman",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/aviramroi/VectorORM",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aviramroi/VectorORM.git",
+    "directory": "packages/core"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -40,11 +51,15 @@
     "vitest": "^1.2.0"
   },
   "keywords": [
+    "glyph",
+    "vectororm",
     "vector",
     "orm",
     "rag",
     "embeddings",
-    "vectordb"
-  ],
-  "license": "MIT"
+    "vectordb",
+    "ingestion",
+    "enrichment",
+    "retrieval"
+  ]
 }
