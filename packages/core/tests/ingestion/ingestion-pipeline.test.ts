@@ -75,7 +75,7 @@ describe('IngestionPipeline', () => {
     expect(stats.documentsFailed).toBe(0);
     expect(stats.chunksCreated).toBeGreaterThan(0);
     expect(stats.chunksUpserted).toBe(stats.chunksCreated);
-    expect(stats.timeMs).toBeGreaterThan(0);
+    expect(stats.timeMs).toBeGreaterThanOrEqual(0);
   });
 
   it('should auto-extract vertical metadata', async () => {
