@@ -10,3 +10,6 @@ export * from './types';
 
 // Classifiers
 export * from './classifiers';
+
+// Pipeline
+export * from './enrichment-pipeline';
