@@ -5,5 +5,8 @@
  * with additional metadata such as themes, sections, and vertical classifications.
  */
 
+// Types
+export * from './types';
+
 // Classifiers
 export * from './classifiers';
