@@ -126,11 +126,11 @@ export class IngestionPipeline {
     });
 
     // Embed chunks
-    const texts = chunks.map(c => c.text);
+    const texts = chunks.map((c: TextChunk) => c.text);
     const embeddings = await this.embedder.embedBatch(texts);
 
     // Build vector records with metadata
-    const records: VectorRecord[] = chunks.map((chunk, i) => {
+    const records: VectorRecord[] = chunks.map((chunk: TextChunk, i: number) => {
       const metadata = this.buildMetadata(doc, chunk, config);
 
       return {
