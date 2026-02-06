@@ -61,4 +61,16 @@ describe('TextLoader', () => {
 
     await expect(loader.load(filePath)).rejects.toThrow();
   });
+
+  it('should include metadata with size and extension', async () => {
+    const filePath = path.join(tempDir, 'sample.txt');
+    const content = 'Hello, World!';
+    await fs.writeFile(filePath, content, 'utf-8');
+
+    const doc = await loader.load(filePath);
+
+    expect(doc.metadata).toBeDefined();
+    expect(doc.metadata?.size).toBe(content.length);
+    expect(doc.metadata?.extension).toBe('.txt');
+  });
 });

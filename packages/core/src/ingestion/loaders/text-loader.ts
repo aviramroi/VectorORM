@@ -16,11 +16,17 @@ export class TextLoader implements DocumentLoader {
   async load(filePath: string): Promise<Document> {
     const text = await fs.readFile(filePath, 'utf-8');
     const type = path.extname(filePath).slice(1).toLowerCase();
+    const stats = await fs.stat(filePath);
+    const extension = path.extname(filePath);
 
     return {
       text,
       source: filePath,
-      type
+      type,
+      metadata: {
+        size: stats.size,
+        extension
+      }
     };
   }
 }
