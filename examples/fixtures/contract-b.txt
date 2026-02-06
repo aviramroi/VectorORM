@@ -1,0 +1,29 @@
+SERVICE AGREEMENT — Contract No. SVC-2024-B
+
+1. PARTIES
+
+This Service Agreement is entered into between GlobalTech Inc. ("Client") and CloudFirst Partners ("Provider") effective March 1, 2024.
+
+2. SCOPE OF SERVICES
+
+Provider shall deliver cloud migration and management services including AWS infrastructure provisioning, application containerization, CI/CD pipeline setup, and ongoing cloud operations management for Client's SaaS platform.
+
+3. TERM AND TERMINATION
+
+This agreement has an initial term of 36 months. Either party may terminate with 120 days written notice after the initial term. Early termination by Client requires payment of remaining contract value minus 25% mitigation discount. Provider may terminate for material breach with 30 days cure period.
+
+4. PAYMENT TERMS
+
+Client shall pay $28,000 per month, due within 45 days of invoice. Late payments incur 1% monthly interest. Rate adjustments occur annually based on cloud infrastructure cost changes, capped at 5%.
+
+5. SERVICE LEVEL AGREEMENT
+
+Provider guarantees 99.95% uptime for production systems. Response time for critical incidents is 10 minutes. Resolution time targets: critical issues within 2 hours, high priority within 4 hours, standard within 12 hours. SLA credits: 10% monthly credit per missed metric, up to 30%.
+
+6. LIABILITY AND INDEMNIFICATION
+
+Provider's total liability is limited to 18 months of fees paid. Provider carries $5 million cyber liability insurance and $3 million professional liability insurance. Data breach notification must occur within 24 hours. Each party indemnifies the other against third-party claims arising from negligence.
+
+7. CONFIDENTIALITY
+
+Both parties agree to maintain confidentiality of proprietary information indefinitely. All Client data remains Client property. Provider must delete all Client data within 30 days of contract termination upon request.

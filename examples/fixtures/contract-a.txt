@@ -1,0 +1,29 @@
+SERVICE AGREEMENT — Contract No. SVC-2024-A
+
+1. PARTIES
+
+This Service Agreement is entered into between Acme Corporation ("Client") and TechServ Solutions ("Provider") effective January 1, 2024.
+
+2. SCOPE OF SERVICES
+
+Provider shall deliver managed IT infrastructure services including server management, network monitoring, cybersecurity operations, and help desk support for Client's headquarters and three regional offices.
+
+3. TERM AND TERMINATION
+
+This agreement has an initial term of 24 months. Either party may terminate with 90 days written notice after the initial term. Early termination by Client requires payment of 50% of remaining contract value. Provider may terminate immediately for non-payment exceeding 60 days.
+
+4. PAYMENT TERMS
+
+Client shall pay $15,000 per month, due within 30 days of invoice. Late payments incur 1.5% monthly interest. Annual rate increases are capped at 3% with 60 days advance notice.
+
+5. SERVICE LEVEL AGREEMENT
+
+Provider guarantees 99.9% uptime for critical systems. Response time for critical incidents is 15 minutes. Resolution time targets: critical issues within 4 hours, high priority within 8 hours, standard within 24 hours. Failure to meet SLA targets results in 5% monthly credit per missed metric, up to 25%.
+
+6. LIABILITY AND INDEMNIFICATION
+
+Provider's total liability is limited to 12 months of fees paid. Neither party is liable for indirect, consequential, or punitive damages. Provider shall maintain $2 million professional liability insurance. Each party indemnifies the other against third-party claims arising from breach.
+
+7. CONFIDENTIALITY
+
+Both parties agree to maintain confidentiality of proprietary information for five years beyond contract termination. Confidential information excludes publicly available data, information independently developed, or information disclosed by authorized third parties.

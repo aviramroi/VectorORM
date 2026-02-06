@@ -1,0 +1,27 @@
+PROPOSAL: Cloud Infrastructure Services — BetaCloud Corp
+
+Executive Summary
+
+BetaCloud Corp presents a cloud-native infrastructure proposal designed for maximum scalability and developer productivity. Our solution leverages cutting-edge serverless and container technologies to minimize operational overhead.
+
+Technical Approach
+
+Our architecture centers on serverless-first design using AWS Lambda, API Gateway, and Step Functions for business logic. Container workloads run on Amazon ECS Fargate, eliminating cluster management. We use AWS CDK for infrastructure definition, providing type-safe infrastructure code.
+
+Data layer uses Aurora Serverless v2 for relational workloads with automatic scaling, and DynamoDB with on-demand capacity for NoSQL needs. Amazon EventBridge provides event-driven integration between services.
+
+Team and Experience
+
+BetaCloud has 85 cloud architects and engineers, all AWS-certified at professional level. Our team has delivered 30 cloud-native projects over the past two years, with particular expertise in serverless architectures for SaaS companies and e-commerce platforms.
+
+Pricing
+
+The proposed budget is $380,000 annually: infrastructure costs $220,000, managed services $110,000, and support $50,000. A 15% discount applies for a 2-year commitment. Migration project is a one-time fee of $120,000. Pay-as-you-go pricing means infrastructure costs scale directly with usage.
+
+Timeline
+
+Migration will be completed in 3 phases over 5 months. Phase 1: Discovery and architecture design (3 weeks). Phase 2: Core infrastructure and first workloads (8 weeks). Phase 3: Remaining workloads and optimization (6 weeks). An optional Phase 4 for advanced optimizations spans an additional 3 weeks.
+
+Support
+
+24/7 support with 10-minute response time for critical issues. Slack-based support channel with direct access to engineering team. 99.99% uptime SLA for serverless components, 99.95% for container workloads.

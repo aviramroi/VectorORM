@@ -16,6 +16,9 @@ coverage/
 dist/
 build/
 
+# Generated docs
+docs/api/
+
 # Environment variables
 .env
 .env.local

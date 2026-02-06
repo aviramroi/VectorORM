@@ -1,0 +1,15 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": ["packages/core/src/index.ts"],
+  "out": "docs/api",
+  "name": "Glyph VectorORM",
+  "readme": "none",
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "excludeInternal": true,
+  "tsconfig": "packages/core/tsconfig.json",
+  "navigationLinks": {
+    "Guide": "../guide.md",
+    "GitHub": "https://github.com/glyph-orm/glyph"
+  }
+}
