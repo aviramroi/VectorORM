@@ -4,3 +4,4 @@ export type { Document } from '../types';
 export { TextLoader } from './text-loader';
 export { PDFLoader } from './pdf-loader';
 export { DOCXLoader } from './docx-loader';
+export { HTMLLoader } from './html-loader';
