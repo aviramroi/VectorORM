@@ -53,3 +53,6 @@ export * from './enrichment';
 
 // Ingestion
 export * from './ingestion';
+
+// Client
+export * from './client';
