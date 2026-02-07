@@ -1,4 +1,4 @@
-# Glyph Core Foundation Implementation Plan
+# VectorORM Core Foundation Implementation Plan
 
 > **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
 
@@ -25,7 +25,7 @@
 ```bash
 cat > package.json << 'EOF'
 {
-  "name": "glyph-monorepo",
+  "name": "vectororm-monorepo",
   "version": "0.0.0",
   "private": true,
   "workspaces": [
@@ -79,7 +79,7 @@ cat > packages/core/package.json << 'EOF'
 {
   "name": "@vectororm/core",
   "version": "0.1.0",
-  "description": "Core abstractions for Glyph vectorORM",
+  "description": "Core abstractions for VectorORM",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -292,7 +292,7 @@ cat > packages/core/src/types/vector-record.ts << 'EOF'
 /**
  * Represents a vector record in the database.
  *
- * This is the fundamental unit of storage in Glyph, containing:
+ * This is the fundamental unit of storage in VectorORM, containing:
  * - Unique identifier
  * - Embedding vector
  * - Metadata (including V/H/S fields)
@@ -409,7 +409,7 @@ Expected: FAIL - Cannot find module '../../src/metadata/constants'
 mkdir -p packages/core/src/metadata
 cat > packages/core/src/metadata/constants.ts << 'EOF'
 /**
- * Metadata field prefixes for the three axes of Glyph's schema.
+ * Metadata field prefixes for the three axes of VectorORM's schema.
  *
  * These prefixes separate framework fields from user-defined metadata:
  * - __v_: Vertical axis (document identity)
@@ -1440,7 +1440,7 @@ import type { CollectionStats, MetadataUpdate, DistanceMetric } from './types';
  * Abstract base class for vector database adapters.
  *
  * All adapters must implement these methods to ensure compatibility
- * with the Glyph abstraction layer.
+ * with the VectorORM abstraction layer.
  *
  * This enables database-agnostic operations - write once, run on any vector DB.
  */

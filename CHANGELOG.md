@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## 0.1.0 — 2026-02-07
 
-Initial release of Glyph VectorORM.
+Initial release of VectorORM.
 
 ### Core (`@vectororm/core`)
 

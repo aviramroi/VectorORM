@@ -1,4 +1,4 @@
-# Glyph VectorORM - Implementation Design
+# VectorORM - Implementation Design
 
 **Date:** 2026-02-05
 **Status:** Approved for Implementation
@@ -6,7 +6,7 @@
 
 ## Executive Summary
 
-Glyph is a TypeScript-first vectorORM that brings database abstraction and ORM-like patterns to vector databases. It introduces Vertical RAG (document-level filtering) and Horizontal RAG (theme/section-level filtering) as first-class concepts.
+VectorORM is a TypeScript-first vectorORM that brings database abstraction and ORM-like patterns to vector databases. It introduces Vertical RAG (document-level filtering) and Horizontal RAG (theme/section-level filtering) as first-class concepts.
 
 ## Technology Stack
 
@@ -22,7 +22,7 @@ Glyph is a TypeScript-first vectorORM that brings database abstraction and ORM-l
 ### Monorepo Structure
 
 ```
-glyph/
+vectororm/
 ├── packages/
 │   ├── core/                      # @vectororm/core - Main package
 │   │   ├── src/

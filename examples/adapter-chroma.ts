@@ -1,7 +1,7 @@
 /**
  * ChromaDB Adapter Example
  *
- * Shows how to use Glyph VectorORM with ChromaDB:
+ * Shows how to use VectorORM with ChromaDB:
  * 1. Configure the ChromaAdapter
  * 2. Create a RAGClient
  * 3. Ingest, retrieve, and query
@@ -24,7 +24,7 @@ import { SimpleEmbedder } from './helpers/mock-embedder';
 import { InMemoryAdapter } from './helpers/mock-adapter';
 
 async function main() {
-  console.log('=== Glyph VectorORM — ChromaDB Adapter Example ===\n');
+  console.log('=== VectorORM — ChromaDB Adapter Example ===\n');
 
   // ── Configuration ─────────────────────────────────────────────────────
   // Real ChromaDB configuration:

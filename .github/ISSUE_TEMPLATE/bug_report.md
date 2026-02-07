@@ -1,6 +1,6 @@
 ---
 name: Bug Report
-about: Report a bug in Glyph VectorORM
+about: Report a bug in VectorORM
 title: ''
 labels: bug
 assignees: ''

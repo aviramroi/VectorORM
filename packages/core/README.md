@@ -3,7 +3,7 @@
 [![npm](https://img.shields.io/npm/v/@vectororm/core)](https://www.npmjs.com/package/@vectororm/core)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-Core package for [Glyph VectorORM](https://github.com/aviramroi/VectorORM) — a TypeScript-first vector ORM with Vertical and Horizontal RAG.
+Core package for [VectorORM](https://github.com/aviramroi/VectorORM) — a TypeScript-first vector ORM with Vertical and Horizontal RAG.
 
 Includes the abstract adapter base class, universal filter language, metadata builders, ingestion pipeline, enrichment pipeline, query composition layer, and the unified RAGClient facade.
 

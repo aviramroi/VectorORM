@@ -18,7 +18,7 @@ import { query } from './query';
 
 async function main() {
   console.log('╔══════════════════════════════════════════════════════════╗');
-  console.log('║   Glyph VectorORM — Insurance Policy Demo              ║');
+  console.log('║   VectorORM — Insurance Policy Demo                    ║');
   console.log('╚══════════════════════════════════════════════════════════╝\n');
 
   // Step 1: Ingest

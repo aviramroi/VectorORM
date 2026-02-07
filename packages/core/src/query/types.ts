@@ -1,7 +1,7 @@
 /**
  * Query Composition Layer - Retrieval Types and Interfaces
  *
- * Defines the core interfaces for retrieval operations in Glyph.
+ * Defines the core interfaces for retrieval operations in VectorORM.
  * These types abstract query parameters and results across different
  * vector database adapters.
  */

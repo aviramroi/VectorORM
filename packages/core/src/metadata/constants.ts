@@ -1,5 +1,5 @@
 /**
- * Metadata field prefixes for the three axes of Glyph's schema.
+ * Metadata field prefixes for the three axes of VectorORM's schema.
  *
  * These prefixes separate framework fields from user-defined metadata:
  * - __v_: Vertical axis (document identity)

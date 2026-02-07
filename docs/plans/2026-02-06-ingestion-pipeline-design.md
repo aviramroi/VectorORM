@@ -6,7 +6,7 @@
 
 ## Executive Summary
 
-Phase 5 adds document ingestion capabilities to Glyph, enabling users to load documents from various formats (text, PDF, DOCX, HTML), chunk them intelligently, and upsert them to vector databases with automatic vertical metadata extraction. The pipeline is designed for production use with progress reporting, error handling, and smart defaults.
+Phase 5 adds document ingestion capabilities to VectorORM, enabling users to load documents from various formats (text, PDF, DOCX, HTML), chunk them intelligently, and upsert them to vector databases with automatic vertical metadata extraction. The pipeline is designed for production use with progress reporting, error handling, and smart defaults.
 
 ## Architecture Overview
 

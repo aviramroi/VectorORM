@@ -1,6 +1,6 @@
 ---
 name: Feature Request
-about: Suggest a new feature for Glyph VectorORM
+about: Suggest a new feature for VectorORM
 title: ''
 labels: enhancement
 assignees: ''

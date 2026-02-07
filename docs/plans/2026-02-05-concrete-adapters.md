@@ -28,7 +28,7 @@ Create `packages/adapter-pinecone/package.json`:
 {
   "name": "@vectororm/adapter-pinecone",
   "version": "0.1.0",
-  "description": "Pinecone adapter for Glyph vector ORM",
+  "description": "Pinecone adapter for VectorORM",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -1230,7 +1230,7 @@ import type { VectorRecord } from '@vectororm/core';
 
 // Skip if no API key
 const hasApiKey = !!process.env.PINECONE_API_KEY;
-const testIndexName = `glyph-test-${Date.now()}`;
+const testIndexName = `vectororm-test-${Date.now()}`;
 
 describe.skipIf(!hasApiKey)('Pinecone Integration', () => {
   let adapter: PineconeAdapter;

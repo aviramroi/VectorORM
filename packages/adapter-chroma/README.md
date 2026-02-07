@@ -3,7 +3,7 @@
 [![npm](https://img.shields.io/npm/v/@vectororm/adapter-chroma)](https://www.npmjs.com/package/@vectororm/adapter-chroma)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-[ChromaDB](https://www.trychroma.com/) adapter for [Glyph VectorORM](https://github.com/aviramroi/VectorORM).
+[ChromaDB](https://www.trychroma.com/) adapter for [VectorORM](https://github.com/aviramroi/VectorORM).
 
 ## Installation
 
@@ -89,7 +89,7 @@ Environment variable fallbacks: `CHROMA_HOST`, `CHROMA_PORT`, `CHROMA_API_KEY`, 
 ## Features
 
 - Full CRUD operations (upsert, fetch, delete)
-- Metadata filtering with Glyph universal filter translation
+- Metadata filtering with VectorORM universal filter translation
 - Collection management (create, delete, exists, stats)
 - Batch iteration for enrichment pipelines
 - Metadata updates without re-uploading vectors

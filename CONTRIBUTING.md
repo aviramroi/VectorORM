@@ -1,4 +1,4 @@
-# Contributing to Glyph VectorORM
+# Contributing to VectorORM
 
 Thank you for your interest in contributing! This document provides guidelines for contributing to the project.
 

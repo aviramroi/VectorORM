@@ -1,7 +1,7 @@
 {
   "name": "@vectororm/adapter-chroma",
   "version": "0.1.0",
-  "description": "ChromaDB adapter for Glyph VectorORM",
+  "description": "ChromaDB adapter for VectorORM",
   "author": "Aviram Roisman",
   "license": "Apache-2.0",
   "homepage": "https://github.com/aviramroi/VectorORM",
@@ -48,7 +48,6 @@
     "@vectororm/core": "^0.1.0"
   },
   "keywords": [
-    "glyph",
     "vectororm",
     "chroma",
     "chromadb",

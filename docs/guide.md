@@ -1,6 +1,6 @@
-# Glyph VectorORM — API Guide
+# VectorORM — API Guide
 
-Glyph is a TypeScript-first vector ORM that brings database abstraction and ORM-like patterns to vector databases. It introduces **Vertical RAG** (document-level filtering) and **Horizontal RAG** (theme/section-level filtering) as first-class concepts.
+VectorORM is a TypeScript-first vector ORM that brings database abstraction and ORM-like patterns to vector databases. It introduces **Vertical RAG** (document-level filtering) and **Horizontal RAG** (theme/section-level filtering) as first-class concepts.
 
 ## Quick Start
 
@@ -40,7 +40,7 @@ console.log(response.answer);
 
 ### Metadata Axes
 
-Glyph organizes vector metadata along three axes, each with a reserved prefix:
+VectorORM organizes vector metadata along three axes, each with a reserved prefix:
 
 | Axis | Prefix | Purpose | Example Fields |
 |------|--------|---------|----------------|
@@ -81,7 +81,7 @@ interface VectorRecord {
 
 ### Document Loaders
 
-Glyph includes built-in loaders for common formats:
+VectorORM includes built-in loaders for common formats:
 
 | Loader | Extensions | Notes |
 |--------|-----------|-------|

@@ -1,7 +1,7 @@
 /**
  * Pinecone Adapter Example
  *
- * Shows how to use Glyph VectorORM with Pinecone:
+ * Shows how to use VectorORM with Pinecone:
  * 1. Configure the PineconeAdapter
  * 2. Create a RAGClient
  * 3. Ingest, retrieve, and query
@@ -22,7 +22,7 @@ import { SimpleEmbedder } from './helpers/mock-embedder';
 import { InMemoryAdapter } from './helpers/mock-adapter';
 
 async function main() {
-  console.log('=== Glyph VectorORM — Pinecone Adapter Example ===\n');
+  console.log('=== VectorORM — Pinecone Adapter Example ===\n');
 
   // ── Configuration ─────────────────────────────────────────────────────
   // Real Pinecone configuration:

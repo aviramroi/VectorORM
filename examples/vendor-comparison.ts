@@ -28,7 +28,7 @@ async function main() {
     defaultTopK: 10
   });
 
-  console.log('=== Glyph VectorORM — Vendor Comparison Example ===\n');
+  console.log('=== VectorORM — Vendor Comparison Example ===\n');
 
   // ── 1. Ingest vendor proposals ────────────────────────────────────────
   await client.createCollection('proposals');

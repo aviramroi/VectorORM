@@ -916,7 +916,7 @@ import { FilterBuilder } from './filter-builder';
 /**
  * Composes and executes queries with vertical/horizontal awareness.
  *
- * This is the main interface for retrieval operations in Glyph.
+ * This is the main interface for retrieval operations in VectorORM.
  * Combines filter building, query embedding, and vector search.
  */
 export class RAGQueryComposer {

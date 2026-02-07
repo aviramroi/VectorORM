@@ -28,7 +28,7 @@ async function main() {
     defaultTopK: 5
   });
 
-  console.log('=== Glyph VectorORM — Legal Contracts Example ===\n');
+  console.log('=== VectorORM — Legal Contracts Example ===\n');
 
   // ── 1. Ingest contracts ──────────────────────────────────────────────
   await client.createCollection('contracts');

@@ -1,6 +1,6 @@
 # Insurance Policy RAG Demo
 
-A complete end-to-end demo of Glyph VectorORM using insurance policy documents. Shows ingestion, enrichment, retrieval, and full RAG query capabilities.
+A complete end-to-end demo of VectorORM using insurance policy documents. Shows ingestion, enrichment, retrieval, and full RAG query capabilities.
 
 ## What This Demo Shows
 
@@ -77,7 +77,7 @@ const llm = new OpenAIClient({ apiKey: process.env.OPENAI_API_KEY, model: 'gpt-4
 
 ### Swap the Vector Database
 
-Replace ChromaAdapter with any Glyph adapter:
+Replace ChromaAdapter with any VectorORM adapter:
 
 ```typescript
 import { PineconeAdapter } from '@vectororm/adapter-pinecone';
@@ -89,7 +89,7 @@ const adapter = new PineconeAdapter({ apiKey: process.env.PINECONE_API_KEY });
 
 ```
 ╔══════════════════════════════════════════════════════════╗
-║   Glyph VectorORM — Insurance Policy Demo              ║
+║   VectorORM — Insurance Policy Demo                    ║
 ╚══════════════════════════════════════════════════════════╝
 
 ┌── Step 1: Ingest ──────────────────────────────────────┐

@@ -1,8 +1,8 @@
 {
-  "name": "glyph-monorepo",
+  "name": "vectororm-monorepo",
   "version": "0.0.0",
   "private": true,
-  "description": "Glyph VectorORM — TypeScript-first vector ORM with Vertical and Horizontal RAG",
+  "description": "VectorORM — TypeScript-first vector ORM with Vertical and Horizontal RAG",
   "author": "Aviram Roisman",
   "license": "Apache-2.0",
   "homepage": "https://github.com/aviramroi/VectorORM",

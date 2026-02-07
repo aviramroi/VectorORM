@@ -5,12 +5,12 @@
 
 ## Overview
 
-Prepare Glyph VectorORM for open source release: licensing, documentation, npm publishing metadata, CI/CD, and community templates.
+Prepare VectorORM for open source release: licensing, documentation, npm publishing metadata, CI/CD, and community templates.
 
 ## 1. Root Files
 
 - `LICENSE` — Apache 2.0, copyright Aviram Roisman 2026
-- `README.md` — Hero README: what Glyph is, features, quick start, package table, links
+- `README.md` — Hero README: what VectorORM is, features, quick start, package table, links
 - `CONTRIBUTING.md` — Fork/clone, install, test, branch naming, PR process, code style
 - `CODE_OF_CONDUCT.md` — Contributor Covenant v2.1
 - `CHANGELOG.md` — Initial 0.1.0 entry summarizing all 7 phases

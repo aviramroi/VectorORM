@@ -6,7 +6,7 @@
 
 ## Executive Summary
 
-Phase 6 adds the RAGClient - a unified facade that ties together all Glyph components (adapter, embedder, LLM, ingestion, enrichment, query) into a single developer-facing API. It also adds the `query()` method for full RAG (retrieve + generate).
+Phase 6 adds the RAGClient - a unified facade that ties together all VectorORM components (adapter, embedder, LLM, ingestion, enrichment, query) into a single developer-facing API. It also adds the `query()` method for full RAG (retrieve + generate).
 
 ## Architecture Overview
 

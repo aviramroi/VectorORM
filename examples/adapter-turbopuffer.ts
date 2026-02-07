@@ -1,7 +1,7 @@
 /**
  * Turbopuffer Adapter Example
  *
- * Shows how to use Glyph VectorORM with Turbopuffer:
+ * Shows how to use VectorORM with Turbopuffer:
  * 1. Configure the TurbopufferAdapter
  * 2. Create a RAGClient
  * 3. Ingest, retrieve, and query
@@ -22,7 +22,7 @@ import { SimpleEmbedder } from './helpers/mock-embedder';
 import { InMemoryAdapter } from './helpers/mock-adapter';
 
 async function main() {
-  console.log('=== Glyph VectorORM — Turbopuffer Adapter Example ===\n');
+  console.log('=== VectorORM — Turbopuffer Adapter Example ===\n');
 
   // ── Configuration ─────────────────────────────────────────────────────
   // Real Turbopuffer configuration:
@@ -39,7 +39,7 @@ async function main() {
   // Environment variable fallbacks:
   //   TURBOPUFFER_API_KEY
   //
-  // Note: Turbopuffer uses "namespaces" — Glyph maps collections to namespaces.
+  // Note: Turbopuffer uses "namespaces" — VectorORM maps collections to namespaces.
   // No SDK dependency — uses REST API directly (Node 18+ fetch).
 
   const adapter = new InMemoryAdapter(); // Replace with TurbopufferAdapter above

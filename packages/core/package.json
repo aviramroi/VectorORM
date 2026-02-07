@@ -1,7 +1,7 @@
 {
   "name": "@vectororm/core",
   "version": "0.1.0",
-  "description": "Core abstractions for Glyph VectorORM — adapters, ingestion, enrichment, query, and RAGClient",
+  "description": "Core abstractions for VectorORM — adapters, ingestion, enrichment, query, and RAGClient",
   "author": "Aviram Roisman",
   "license": "Apache-2.0",
   "homepage": "https://github.com/aviramroi/VectorORM",
@@ -51,7 +51,6 @@
     "vitest": "^1.2.0"
   },
   "keywords": [
-    "glyph",
     "vectororm",
     "vector",
     "orm",

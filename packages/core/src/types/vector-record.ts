@@ -1,7 +1,7 @@
 /**
  * Represents a vector record in the database.
  *
- * This is the fundamental unit of storage in Glyph, containing:
+ * This is the fundamental unit of storage in VectorORM, containing:
  * - Unique identifier
  * - Embedding vector
  * - Metadata (including V/H/S fields)

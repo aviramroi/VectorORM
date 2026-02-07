@@ -4,7 +4,7 @@ import type { VectorRecord } from '@vectororm/core';
 
 // Skip if no API key
 const hasApiKey = !!process.env.PINECONE_API_KEY;
-const testIndexName = `glyph-test-${Date.now()}`;
+const testIndexName = `vectororm-test-${Date.now()}`;
 
 describe.skipIf(!hasApiKey)('Pinecone Integration', () => {
   let adapter: PineconeAdapter;

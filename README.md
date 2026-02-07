@@ -1,9 +1,9 @@
-# Glyph VectorORM
+# VectorORM
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![CI](https://github.com/aviramroi/VectorORM/actions/workflows/ci.yml/badge.svg)](https://github.com/aviramroi/VectorORM/actions/workflows/ci.yml)
 
-A TypeScript-first vector ORM that brings database abstraction and ORM-like patterns to vector databases. Glyph introduces **Vertical RAG** (document-level filtering) and **Horizontal RAG** (theme/section-level filtering) as first-class concepts.
+A TypeScript-first vector ORM that brings database abstraction and ORM-like patterns to vector databases. VectorORM introduces **Vertical RAG** (document-level filtering) and **Horizontal RAG** (theme/section-level filtering) as first-class concepts.
 
 ## Features
 
@@ -60,7 +60,7 @@ console.log(response.sources); // Retrieved chunks used as context
 
 ## Three Metadata Axes
 
-Glyph organizes vector metadata along three axes:
+VectorORM organizes vector metadata along three axes:
 
 | Axis | Prefix | Purpose | Example |
 |------|--------|---------|---------|
@@ -75,9 +75,9 @@ See the [`examples/`](examples/) directory for working demos:
 - **[Insurance Basics](examples/insurance-basics.ts)** — Vertical/Horizontal RAG with policy documents
 - **[Legal Contracts](examples/legal-contracts.ts)** — Cross-document comparison and section retrieval
 - **[Vendor Comparison](examples/vendor-comparison.ts)** — Side-by-side vendor analysis with groupBy
-- **[Chroma Adapter](examples/adapter-chroma.ts)** — Using Glyph with ChromaDB
-- **[Pinecone Adapter](examples/adapter-pinecone.ts)** — Using Glyph with Pinecone
-- **[Turbopuffer Adapter](examples/adapter-turbopuffer.ts)** — Using Glyph with Turbopuffer
+- **[Chroma Adapter](examples/adapter-chroma.ts)** — Using VectorORM with ChromaDB
+- **[Pinecone Adapter](examples/adapter-pinecone.ts)** — Using VectorORM with Pinecone
+- **[Turbopuffer Adapter](examples/adapter-turbopuffer.ts)** — Using VectorORM with Turbopuffer
 - **[Insurance Demo](examples/insurance-demo/)** — Full end-to-end mini-project with ChromaDB
 
 All standalone examples run with `npx tsx examples/<name>.ts` using in-memory mocks (no external services required). Adapter examples show real configuration patterns.

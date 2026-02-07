@@ -1,7 +1,7 @@
 {
   "name": "@vectororm/adapter-turbopuffer",
   "version": "0.1.0",
-  "description": "Turbopuffer adapter for Glyph VectorORM",
+  "description": "Turbopuffer adapter for VectorORM",
   "author": "Aviram Roisman",
   "license": "Apache-2.0",
   "homepage": "https://github.com/aviramroi/VectorORM",
@@ -47,7 +47,6 @@
     "@vectororm/core": "^0.1.0"
   },
   "keywords": [
-    "glyph",
     "vectororm",
     "turbopuffer",
     "vector-database",

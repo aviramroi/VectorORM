@@ -30,7 +30,7 @@ async function main() {
     defaultTopK: 5
   });
 
-  console.log('=== Glyph VectorORM — Insurance Example ===\n');
+  console.log('=== VectorORM — Insurance Example ===\n');
 
   // ── 2. Create collection and ingest ──────────────────────────────────
   await client.createCollection('policies');

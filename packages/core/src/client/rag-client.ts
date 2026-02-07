@@ -22,7 +22,7 @@ const DEFAULT_RAG_SYSTEM_PROMPT =
   'If the context doesn\'t contain enough information, say so.';
 
 /**
- * RAGClient - Unified facade for all Glyph VectorORM operations.
+ * RAGClient - Unified facade for all VectorORM operations.
  *
  * Ties together adapter, embedder, LLM, ingestion, enrichment, and query
  * into a single developer-facing API.

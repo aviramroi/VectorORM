@@ -1,7 +1,7 @@
 {
   "name": "@vectororm/adapter-pinecone",
   "version": "0.1.0",
-  "description": "Pinecone adapter for Glyph VectorORM",
+  "description": "Pinecone adapter for VectorORM",
   "author": "Aviram Roisman",
   "license": "Apache-2.0",
   "homepage": "https://github.com/aviramroi/VectorORM",
@@ -48,7 +48,6 @@
     "@vectororm/core": "^0.1.0"
   },
   "keywords": [
-    "glyph",
     "vectororm",
     "pinecone",
     "vector-database",
