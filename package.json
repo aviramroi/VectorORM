@@ -22,7 +22,7 @@
     "docs:generate": "typedoc"
   },
   "devDependencies": {
-    "turbo": "^1.12.0",
+    "turbo": "2.8.3",
     "typedoc": "0.28.16",
     "typescript": "^5.3.3"
   },
