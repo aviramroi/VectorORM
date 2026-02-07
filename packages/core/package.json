@@ -1,6 +1,6 @@
 {
   "name": "@vectororm/core",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Core abstractions for VectorORM — adapters, ingestion, enrichment, query, and RAGClient",
   "author": "Aviram Roisman",
   "license": "Apache-2.0",

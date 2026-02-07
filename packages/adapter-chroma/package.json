@@ -1,6 +1,6 @@
 {
   "name": "@vectororm/adapter-chroma",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "ChromaDB adapter for VectorORM",
   "author": "Aviram Roisman",
   "license": "Apache-2.0",
@@ -24,7 +24,10 @@
       "import": "./dist/index.js"
     }
   },
-  "files": ["dist", "README.md"],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "engines": {
     "node": ">=18.0.0"
   },
@@ -45,7 +48,7 @@
     "vitest": "^1.0.0"
   },
   "peerDependencies": {
-    "@vectororm/core": "^0.1.0"
+    "@vectororm/core": "^0.1.2"
   },
   "keywords": [
     "vectororm",
