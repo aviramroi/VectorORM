@@ -1,5 +1,16 @@
 # @vectororm/adapter-turbopuffer
 
+## 1.0.0
+
+### Minor Changes
+
+- [`0f9e54d`](https://github.com/aviramroi/VectorORM/commit/0f9e54dddb0e14ed674935a40ad432fd52574107) Thanks [@aviramroi](https://github.com/aviramroi)! - Add `region` config option to TurbopufferAdapter. Sets the base URL to `https://{region}.turbopuffer.com` (e.g. `aws-us-east-1`, `gcp-us-central1`). Falls back to `TURBOPUFFER_REGION` env var.
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @vectororm/core@1.0.0
+
 ## 0.1.2
 
 ### Patch Changes

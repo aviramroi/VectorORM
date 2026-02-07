@@ -1,6 +1,6 @@
 {
   "name": "@vectororm/adapter-turbopuffer",
-  "version": "0.1.2",
+  "version": "1.0.0",
   "description": "Turbopuffer adapter for VectorORM",
   "author": "Aviram Roisman",
   "license": "Apache-2.0",
@@ -47,7 +47,7 @@
     "vitest": "^1.0.0"
   },
   "peerDependencies": {
-    "@vectororm/core": "^0.1.2"
+    "@vectororm/core": "^1.0.0"
   },
   "keywords": [
     "vectororm",
