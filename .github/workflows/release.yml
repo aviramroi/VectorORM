@@ -1,6 +1,8 @@
 name: Release
 
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
     inputs:
       bump:
@@ -43,25 +45,25 @@ jobs:
         run: npm run build
 
       - name: Publish @glyph/core
-        run: npm publish --access public
+        run: npm publish --access public || true
         working-directory: packages/core
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish @glyph/adapter-chroma
-        run: npm publish --access public
+        run: npm publish --access public || true
         working-directory: packages/adapter-chroma
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish @glyph/adapter-pinecone
-        run: npm publish --access public
+        run: npm publish --access public || true
         working-directory: packages/adapter-pinecone
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish @glyph/adapter-turbopuffer
-        run: npm publish --access public
+        run: npm publish --access public || true
         working-directory: packages/adapter-turbopuffer
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
