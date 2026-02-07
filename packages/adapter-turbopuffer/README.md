@@ -53,7 +53,24 @@ await adapter.disconnect();
 ### TurbopufferConfig
 
 - `apiKey` (required): Your Turbopuffer API key
-- `baseUrl` (optional): Custom API base URL (defaults to `https://api.turbopuffer.com`)
+- `region` (optional): Turbopuffer region (e.g. `aws-us-east-1`, `gcp-us-central1`). Sets base URL to `https://{region}.turbopuffer.com`
+- `baseUrl` (optional): Custom API base URL. Overrides `region` if both are provided. Defaults to `https://api.turbopuffer.com`
+
+### Region Examples
+
+```typescript
+// US East (AWS)
+new TurbopufferAdapter({ apiKey: '...', region: 'aws-us-east-1' });
+
+// Europe (GCP Frankfurt)
+new TurbopufferAdapter({ apiKey: '...', region: 'gcp-europe-west3' });
+
+// Custom endpoint
+new TurbopufferAdapter({ apiKey: '...', baseUrl: 'https://custom.example.com' });
+
+// Environment variable: TURBOPUFFER_REGION=aws-us-east-1
+new TurbopufferAdapter({ apiKey: '...' }); // picks up region from env
+```
 
 ## Features
 

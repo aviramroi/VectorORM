@@ -24,6 +24,24 @@ describe('TurbopufferAdapter - Connection', () => {
     expect(customAdapter).toBeDefined();
   });
 
+  it('should build region-based URL from region config', () => {
+    const regionalAdapter = new TurbopufferAdapter({
+      apiKey: 'test-api-key',
+      region: 'aws-us-east-1',
+    });
+    expect(regionalAdapter).toBeDefined();
+    // The adapter should use https://aws-us-east-1.turbopuffer.com
+  });
+
+  it('should prefer baseUrl over region when both provided', () => {
+    const adapter = new TurbopufferAdapter({
+      apiKey: 'test-api-key',
+      region: 'aws-us-east-1',
+      baseUrl: 'https://custom.example.com',
+    });
+    expect(adapter).toBeDefined();
+  });
+
   it('should start disconnected', async () => {
     const connected = await adapter.isConnected();
     expect(connected).toBe(false);

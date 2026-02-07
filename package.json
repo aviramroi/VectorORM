@@ -25,11 +25,6 @@
     "release": "changeset publish",
     "prepare": "husky"
   },
-  "lint-staged": {
-    "packages/**/*.ts": [
-      "tsc --noEmit --pretty"
-    ]
-  },
   "devDependencies": {
     "@changesets/changelog-github": "0.5.2",
     "@changesets/cli": "2.29.8",

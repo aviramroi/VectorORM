@@ -33,7 +33,18 @@ export class TurbopufferAdapter extends VectorDBAdapter {
     }
 
     this.config = config;
-    this.baseUrl = config.baseUrl || 'https://api.turbopuffer.com';
+
+    // Resolve base URL: explicit baseUrl > region > env > default
+    if (config.baseUrl) {
+      this.baseUrl = config.baseUrl;
+    } else if (config.region) {
+      this.baseUrl = `https://${config.region}.turbopuffer.com`;
+    } else {
+      const envRegion = process.env.TURBOPUFFER_REGION;
+      this.baseUrl = envRegion
+        ? `https://${envRegion}.turbopuffer.com`
+        : 'https://api.turbopuffer.com';
+    }
   }
 
   // ============================================================================

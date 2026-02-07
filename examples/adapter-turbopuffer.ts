@@ -31,16 +31,17 @@ async function main() {
   //
   //   const adapter = new TurbopufferAdapter({
   //     apiKey: process.env.TURBOPUFFER_API_KEY!,
-  //     // baseUrl: 'https://api.turbopuffer.com', // Optional: custom endpoint
+  //     region: 'aws-us-east-1',  // or 'gcp-us-central1', etc.
   //   });
   //
   //   await adapter.connect();
   //
   // Environment variable fallbacks:
-  //   TURBOPUFFER_API_KEY
+  //   TURBOPUFFER_API_KEY, TURBOPUFFER_REGION
   //
+  // Region sets the base URL to https://{region}.turbopuffer.com
+  // You can also use baseUrl directly for custom endpoints.
   // Note: Turbopuffer uses "namespaces" — VectorORM maps collections to namespaces.
-  // No SDK dependency — uses REST API directly (Node 18+ fetch).
 
   const adapter = new InMemoryAdapter(); // Replace with TurbopufferAdapter above
   const embedder = new SimpleEmbedder();

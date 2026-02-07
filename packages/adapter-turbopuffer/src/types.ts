@@ -11,8 +11,17 @@ export interface TurbopufferConfig {
   apiKey: string;
 
   /**
+   * Turbopuffer region (e.g. 'aws-us-east-1', 'gcp-us-central1').
+   * Sets the base URL to https://{region}.turbopuffer.com
+   * Falls back to TURBOPUFFER_REGION environment variable.
+   * Ignored if baseUrl is provided.
+   */
+  region?: string;
+
+  /**
    * Base URL for Turbopuffer API (optional).
-   * Defaults to https://api.turbopuffer.com
+   * Overrides region if both are provided.
+   * Defaults to https://api.turbopuffer.com (or region-based URL if region is set).
    * Falls back to TURBOPUFFER_BASE_URL environment variable.
    */
   baseUrl?: string;
