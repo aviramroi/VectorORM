@@ -1,0 +1,30 @@
+core:
+  - changed-files:
+      - any-glob-to-any-file: packages/core/**
+
+adapter-chroma:
+  - changed-files:
+      - any-glob-to-any-file: packages/adapter-chroma/**
+
+adapter-pinecone:
+  - changed-files:
+      - any-glob-to-any-file: packages/adapter-pinecone/**
+
+adapter-turbopuffer:
+  - changed-files:
+      - any-glob-to-any-file: packages/adapter-turbopuffer/**
+
+docs:
+  - changed-files:
+      - any-glob-to-any-file:
+          - docs/**
+          - "*.md"
+          - packages/*/README.md
+
+ci:
+  - changed-files:
+      - any-glob-to-any-file: .github/**
+
+examples:
+  - changed-files:
+      - any-glob-to-any-file: examples/**

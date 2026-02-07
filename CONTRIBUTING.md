@@ -35,19 +35,43 @@ Thank you for your interest in contributing! This document provides guidelines f
 3. Ensure tests pass: `npm test`
 4. Ensure TypeScript compiles: `npm run lint`
 5. Ensure build succeeds: `npm run build`
-6. Commit with a descriptive message (see commit style below)
-7. Push and open a Pull Request
+6. Add a changeset (see below)
+7. Commit with a descriptive message (see commit style below)
+8. Push and open a Pull Request
+
+### Adding a Changeset
+
+Every PR that changes runtime code or fixes a bug should include a changeset. This describes what changed and the semver impact:
+
+```bash
+npm run changeset
+```
+
+You'll be prompted to:
+1. Select which packages are affected
+2. Choose the bump type (`patch` for fixes, `minor` for features, `major` for breaking changes)
+3. Write a short summary of the change
+
+This creates a file in `.changeset/` — commit it with your PR. When the PR is merged, a bot will open a "Version Packages" PR that bumps versions and updates changelogs.
+
+**When to skip a changeset:** Pure docs changes, CI tweaks, or test-only changes don't need one.
 
 ### Commit Style
 
-We use conventional commits:
+We use [Conventional Commits](https://www.conventionalcommits.org/), enforced by commitlint. A pre-commit hook also runs type checking via lint-staged.
+
+**Format:** `type(scope): description`
+
+**Types:** `feat`, `fix`, `docs`, `test`, `chore`, `refactor`, `perf`, `ci`
+
+**Scopes:** `core`, `adapter-chroma`, `adapter-pinecone`, `adapter-turbopuffer`, `deps`, `ci`, `release` (or omit scope)
 
 ```
 feat(core): add new filter operator
 fix(adapter-chroma): handle empty search results
 docs: update API guide with enrichment examples
-test(ingestion): add edge case tests for PDF loader
-chore: update dependencies
+test(core): add edge case tests for PDF loader
+chore(deps): update dependencies
 ```
 
 ### Code Style
