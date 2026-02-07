@@ -3,7 +3,6 @@
  * Uses pre-trained models without requiring fine-tuning or training data
  */
 
-import { pipeline } from '@xenova/transformers';
 import type { ThemeClassifier, ThemeClassification } from './theme-classifier';
 
 /**
@@ -67,6 +66,7 @@ export class ZeroShotThemeClassifier implements ThemeClassifier {
    */
   private async ensureModelLoaded(): Promise<any> {
     if (!this.model) {
+      const { pipeline } = await import('@xenova/transformers');
       this.model = await pipeline('zero-shot-classification', this.modelName);
     }
     return this.model;
