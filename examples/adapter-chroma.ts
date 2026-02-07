@@ -16,8 +16,8 @@ import { MockLLM } from '../packages/core/src/llm/mock-llm';
 import { SimpleEmbedder } from './helpers/mock-embedder';
 
 // In a real app, you would import from the published packages:
-//   import { RAGClient } from '@glyph/core';
-//   import { ChromaAdapter } from '@glyph/adapter-chroma';
+//   import { RAGClient } from '@vectororm/core';
+//   import { ChromaAdapter } from '@vectororm/adapter-chroma';
 
 // For this example, we use the InMemoryAdapter to avoid requiring a running Chroma instance.
 // Replace with ChromaAdapter for real usage.
@@ -29,7 +29,7 @@ async function main() {
   // ── Configuration ─────────────────────────────────────────────────────
   // Real ChromaDB configuration:
   //
-  //   import { ChromaAdapter } from '@glyph/adapter-chroma';
+  //   import { ChromaAdapter } from '@vectororm/adapter-chroma';
   //
   //   const adapter = new ChromaAdapter({
   //     host: 'localhost',       // Chroma server host

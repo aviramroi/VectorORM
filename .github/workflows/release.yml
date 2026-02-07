@@ -33,7 +33,7 @@ jobs:
           registry-url: https://registry.npmjs.org
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Lint
         run: npm run lint
@@ -44,25 +44,25 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Publish @glyph/core
+      - name: Publish @vectororm/core
         run: npm publish --access public || true
         working-directory: packages/core
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Publish @glyph/adapter-chroma
+      - name: Publish @vectororm/adapter-chroma
         run: npm publish --access public || true
         working-directory: packages/adapter-chroma
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Publish @glyph/adapter-pinecone
+      - name: Publish @vectororm/adapter-pinecone
         run: npm publish --access public || true
         working-directory: packages/adapter-pinecone
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Publish @glyph/adapter-turbopuffer
+      - name: Publish @vectororm/adapter-turbopuffer
         run: npm publish --access public || true
         working-directory: packages/adapter-turbopuffer
         env:

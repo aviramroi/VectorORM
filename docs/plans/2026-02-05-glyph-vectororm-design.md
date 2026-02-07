@@ -24,7 +24,7 @@ Glyph is a TypeScript-first vectorORM that brings database abstraction and ORM-l
 ```
 glyph/
 ├── packages/
-│   ├── core/                      # @glyph/core - Main package
+│   ├── core/                      # @vectororm/core - Main package
 │   │   ├── src/
 │   │   │   ├── adapters/         # Abstract adapter base
 │   │   │   ├── filters/          # Universal filter language
@@ -38,11 +38,11 @@ glyph/
 │   │   │   └── index.ts          # Public exports
 │   │   ├── tests/
 │   │   └── package.json
-│   ├── adapter-pinecone/          # @glyph/adapter-pinecone
-│   ├── adapter-qdrant/            # @glyph/adapter-qdrant
-│   ├── adapter-weaviate/          # @glyph/adapter-weaviate
-│   ├── adapter-chroma/            # @glyph/adapter-chroma
-│   └── adapter-pgvector/          # @glyph/adapter-pgvector
+│   ├── adapter-pinecone/          # @vectororm/adapter-pinecone
+│   ├── adapter-qdrant/            # @vectororm/adapter-qdrant
+│   ├── adapter-weaviate/          # @vectororm/adapter-weaviate
+│   ├── adapter-chroma/            # @vectororm/adapter-chroma
+│   └── adapter-pgvector/          # @vectororm/adapter-pgvector
 ├── docs/
 ├── examples/
 ├── turbo.json
@@ -556,7 +556,7 @@ function createLLM(model: string, credentials?: any): LLMClient;
 
 ## Package Dependencies
 
-### @glyph/core
+### @vectororm/core
 ```json
 {
   "dependencies": {
@@ -574,11 +574,11 @@ function createLLM(model: string, credentials?: any): LLMClient;
 
 ### Adapter Packages
 Each adapter has its own DB client as a dependency:
-- `@glyph/adapter-pinecone`: `@pinecone-database/pinecone`
-- `@glyph/adapter-qdrant`: `@qdrant/js-client-rest`
-- `@glyph/adapter-weaviate`: `weaviate-ts-client`
-- `@glyph/adapter-chroma`: `chromadb`
-- `@glyph/adapter-pgvector`: `pg` + `pgvector`
+- `@vectororm/adapter-pinecone`: `@pinecone-database/pinecone`
+- `@vectororm/adapter-qdrant`: `@qdrant/js-client-rest`
+- `@vectororm/adapter-weaviate`: `weaviate-ts-client`
+- `@vectororm/adapter-chroma`: `chromadb`
+- `@vectororm/adapter-pgvector`: `pg` + `pgvector`
 
 ## Testing Strategy
 
@@ -643,7 +643,7 @@ Each adapter has its own DB client as a dependency:
 - [ ] >80% test coverage on core package
 - [ ] Complete TypeDoc API documentation
 - [ ] Working examples for insurance, legal, and vendor comparison use cases
-- [ ] Published to npm as scoped packages (@glyph/*)
+- [ ] Published to npm as scoped packages (@vectororm/*)
 
 ## Open Questions
 

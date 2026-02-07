@@ -1,6 +1,6 @@
-# @glyph/adapter-turbopuffer
+# @vectororm/adapter-turbopuffer
 
-[![npm](https://img.shields.io/npm/v/@glyph/adapter-turbopuffer)](https://www.npmjs.com/package/@glyph/adapter-turbopuffer)
+[![npm](https://img.shields.io/npm/v/@vectororm/adapter-turbopuffer)](https://www.npmjs.com/package/@vectororm/adapter-turbopuffer)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 [Turbopuffer](https://turbopuffer.com/) adapter for [Glyph VectorORM](https://github.com/aviramroi/VectorORM).
@@ -8,13 +8,13 @@
 ## Installation
 
 ```bash
-npm install @glyph/adapter-turbopuffer @glyph/core
+npm install @vectororm/adapter-turbopuffer @vectororm/core
 ```
 
 ## Usage
 
 ```typescript
-import { TurbopufferAdapter } from '@glyph/adapter-turbopuffer';
+import { TurbopufferAdapter } from '@vectororm/adapter-turbopuffer';
 
 // Create adapter
 const adapter = new TurbopufferAdapter({

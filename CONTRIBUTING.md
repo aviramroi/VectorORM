@@ -70,7 +70,7 @@ chore: update dependencies
 
 ```
 packages/
-├── core/                    # @glyph/core — Main package
+├── core/                    # @vectororm/core — Main package
 │   ├── src/
 │   │   ├── adapters/       # Abstract adapter base class
 │   │   ├── client/         # RAGClient facade
@@ -83,15 +83,15 @@ packages/
 │   │   ├── query/          # Query composition layer
 │   │   └── types/          # Core type definitions
 │   └── tests/
-├── adapter-chroma/          # @glyph/adapter-chroma
-├── adapter-pinecone/        # @glyph/adapter-pinecone
-└── adapter-turbopuffer/     # @glyph/adapter-turbopuffer
+├── adapter-chroma/          # @vectororm/adapter-chroma
+├── adapter-pinecone/        # @vectororm/adapter-pinecone
+└── adapter-turbopuffer/     # @vectororm/adapter-turbopuffer
 ```
 
 ## Adding a New Adapter
 
 1. Create `packages/adapter-<name>/` with the standard package structure
-2. Extend `VectorDBAdapter` from `@glyph/core`
+2. Extend `VectorDBAdapter` from `@vectororm/core`
 3. Implement all abstract methods
 4. Add filter translation for the target database
 5. Write tests covering all operations

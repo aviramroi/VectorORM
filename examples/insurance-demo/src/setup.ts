@@ -7,9 +7,9 @@
  * This demo uses ChromaDB as the vector store.
  * Start Chroma first: docker run -p 8000:8000 chromadb/chroma
  */
-import { RAGClient, Embedder, LLMClient } from '@glyph/core';
-import { ChromaAdapter } from '@glyph/adapter-chroma';
-import type { GenerateOptions } from '@glyph/core';
+import { RAGClient, Embedder, LLMClient } from '@vectororm/core';
+import { ChromaAdapter } from '@vectororm/adapter-chroma';
+import type { GenerateOptions } from '@vectororm/core';
 
 // ── Placeholder Embedder ──────────────────────────────────────────────────
 // Replace with your real embedder (e.g., OpenAI text-embedding-3-small)

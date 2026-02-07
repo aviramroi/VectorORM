@@ -15,8 +15,8 @@
 ### Structure
 ```
 packages/
-├── core/                          # @glyph/core (existing)
-├── adapter-pinecone/              # @glyph/adapter-pinecone (new)
+├── core/                          # @vectororm/core (existing)
+├── adapter-pinecone/              # @vectororm/adapter-pinecone (new)
 │   ├── src/
 │   │   ├── pinecone-adapter.ts   # Main implementation
 │   │   ├── types.ts               # Pinecone-specific types
@@ -26,17 +26,17 @@ packages/
 │   │   └── integration/           # Real DB tests (skipped if no API key)
 │   ├── TECH_DEBT.md               # Tracks limitations
 │   └── package.json
-├── adapter-turbopuffer/           # @glyph/adapter-turbopuffer (new)
+├── adapter-turbopuffer/           # @vectororm/adapter-turbopuffer (new)
 │   └── (same structure)
-└── adapter-chroma/                # @glyph/adapter-chroma (new)
+└── adapter-chroma/                # @vectororm/adapter-chroma (new)
     └── (same structure)
 ```
 
 ### Key Principles
 - Each adapter is independently installable
 - Zero additions to VectorDBAdapter API - exact implementation only
-- Adapters depend on @glyph/core but core doesn't know about adapters
-- Users install only what they need: `npm install @glyph/core @glyph/adapter-pinecone`
+- Adapters depend on @vectororm/core but core doesn't know about adapters
+- Users install only what they need: `npm install @vectororm/core @vectororm/adapter-pinecone`
 
 ### Package Dependencies
 - **Pinecone**: `@pinecone-database/pinecone`
@@ -238,7 +238,7 @@ describe.skipIf(!hasApiKey)('Pinecone Integration', () => {
 ### TECH_DEBT.md Template
 
 ```markdown
-# Technical Debt - @glyph/adapter-[name]
+# Technical Debt - @vectororm/adapter-[name]
 
 ## Filter Translation Limitations
 

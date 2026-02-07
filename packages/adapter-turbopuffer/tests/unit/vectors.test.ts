@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { TurbopufferAdapter } from '../../src/turbopuffer-adapter';
-import type { VectorRecord, MetadataUpdate } from '@glyph/core';
+import type { VectorRecord, MetadataUpdate } from '@vectororm/core';
 
 describe('TurbopufferAdapter - Vector Operations', () => {
   let adapter: TurbopufferAdapter;

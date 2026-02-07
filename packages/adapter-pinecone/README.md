@@ -1,6 +1,6 @@
-# @glyph/adapter-pinecone
+# @vectororm/adapter-pinecone
 
-[![npm](https://img.shields.io/npm/v/@glyph/adapter-pinecone)](https://www.npmjs.com/package/@glyph/adapter-pinecone)
+[![npm](https://img.shields.io/npm/v/@vectororm/adapter-pinecone)](https://www.npmjs.com/package/@vectororm/adapter-pinecone)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 [Pinecone](https://www.pinecone.io/) adapter for [Glyph VectorORM](https://github.com/aviramroi/VectorORM).
@@ -8,7 +8,7 @@
 ## Installation
 
 ```bash
-npm install @glyph/core @glyph/adapter-pinecone
+npm install @vectororm/core @vectororm/adapter-pinecone
 ```
 
 ## Prerequisites
@@ -20,7 +20,7 @@ A Pinecone account and API key. Set up at [pinecone.io](https://www.pinecone.io/
 ### Standalone Adapter
 
 ```typescript
-import { PineconeAdapter } from '@glyph/adapter-pinecone';
+import { PineconeAdapter } from '@vectororm/adapter-pinecone';
 
 const adapter = new PineconeAdapter({
   apiKey: process.env.PINECONE_API_KEY!,
@@ -52,8 +52,8 @@ const results = await adapter.search('my-index', queryVector, {
 ### With RAGClient
 
 ```typescript
-import { RAGClient } from '@glyph/core';
-import { PineconeAdapter } from '@glyph/adapter-pinecone';
+import { RAGClient } from '@vectororm/core';
+import { PineconeAdapter } from '@vectororm/adapter-pinecone';
 
 const client = new RAGClient({
   adapter: new PineconeAdapter({

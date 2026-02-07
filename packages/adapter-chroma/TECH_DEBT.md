@@ -1,4 +1,4 @@
-# Technical Debt - @glyph/adapter-chroma
+# Technical Debt - @vectororm/adapter-chroma
 
 ## Filter Translation Limitations
 

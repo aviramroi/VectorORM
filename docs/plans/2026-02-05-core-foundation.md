@@ -2,7 +2,7 @@
 
 > **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
 
-**Goal:** Build the foundational core package (@glyph/core) with type system, adapter abstractions, filter language, and metadata schema.
+**Goal:** Build the foundational core package (@vectororm/core) with type system, adapter abstractions, filter language, and metadata schema.
 
 **Architecture:** Monorepo using Turborepo with TypeScript strict mode. Abstract adapter pattern for DB agnosticism. Universal filter language that normalizes to standard format then translates to native DB syntax. Metadata schema with prefixed fields for V/H/S axes.
 
@@ -77,7 +77,7 @@ EOF
 mkdir -p packages/core
 cat > packages/core/package.json << 'EOF'
 {
-  "name": "@glyph/core",
+  "name": "@vectororm/core",
   "version": "0.1.0",
   "description": "Core abstractions for Glyph vectorORM",
   "main": "./dist/index.js",
@@ -219,7 +219,7 @@ git commit -m "chore: initialize monorepo with Turborepo and core package
 
 Set up:
 - Turborepo for monorepo management
-- @glyph/core package with TypeScript strict mode
+- @vectororm/core package with TypeScript strict mode
 - Vitest for testing
 - TSup for building CJS/ESM bundles
 

@@ -10,7 +10,7 @@
  * This demo uses keyword-based classification for simplicity.
  */
 import { createClient, COLLECTION_NAME } from './setup';
-import { KeywordThemeClassifier } from '@glyph/core';
+import { KeywordThemeClassifier } from '@vectororm/core';
 
 export async function enrich() {
   const client = createClient();

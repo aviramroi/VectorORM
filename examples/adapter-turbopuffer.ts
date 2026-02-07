@@ -16,8 +16,8 @@ import { MockLLM } from '../packages/core/src/llm/mock-llm';
 import { SimpleEmbedder } from './helpers/mock-embedder';
 
 // In a real app:
-//   import { RAGClient } from '@glyph/core';
-//   import { TurbopufferAdapter } from '@glyph/adapter-turbopuffer';
+//   import { RAGClient } from '@vectororm/core';
+//   import { TurbopufferAdapter } from '@vectororm/adapter-turbopuffer';
 
 import { InMemoryAdapter } from './helpers/mock-adapter';
 
@@ -27,7 +27,7 @@ async function main() {
   // ── Configuration ─────────────────────────────────────────────────────
   // Real Turbopuffer configuration:
   //
-  //   import { TurbopufferAdapter } from '@glyph/adapter-turbopuffer';
+  //   import { TurbopufferAdapter } from '@vectororm/adapter-turbopuffer';
   //
   //   const adapter = new TurbopufferAdapter({
   //     apiKey: process.env.TURBOPUFFER_API_KEY!,

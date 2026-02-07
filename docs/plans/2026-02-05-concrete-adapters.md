@@ -4,7 +4,7 @@
 
 **Goal:** Implement three production-ready vector database adapters (Pinecone, Turbopuffer, Chroma) with incremental filter support and comprehensive testing.
 
-**Architecture:** Three separate packages (@glyph/adapter-pinecone, @glyph/adapter-turbopuffer, @glyph/adapter-chroma) each implementing the exact VectorDBAdapter API with hybrid config, basic filter operators, simple AND compound filters, and tech debt tracking.
+**Architecture:** Three separate packages (@vectororm/adapter-pinecone, @vectororm/adapter-turbopuffer, @vectororm/adapter-chroma) each implementing the exact VectorDBAdapter API with hybrid config, basic filter operators, simple AND compound filters, and tech debt tracking.
 
 **Tech Stack:** TypeScript, Vitest, @pinecone-database/pinecone, chromadb, Turbopuffer REST API
 
@@ -26,7 +26,7 @@ Create `packages/adapter-pinecone/package.json`:
 
 ```json
 {
-  "name": "@glyph/adapter-pinecone",
+  "name": "@vectororm/adapter-pinecone",
   "version": "0.1.0",
   "description": "Pinecone adapter for Glyph vector ORM",
   "type": "module",
@@ -51,7 +51,7 @@ Create `packages/adapter-pinecone/package.json`:
     "test:integration": "vitest run --config vitest.integration.config.ts"
   },
   "dependencies": {
-    "@glyph/core": "workspace:*",
+    "@vectororm/core": "workspace:*",
     "@pinecone-database/pinecone": "^2.0.0"
   },
   "devDependencies": {
@@ -61,7 +61,7 @@ Create `packages/adapter-pinecone/package.json`:
     "vitest": "^1.0.0"
   },
   "peerDependencies": {
-    "@glyph/core": "^0.1.0"
+    "@vectororm/core": "^0.1.0"
   }
 }
 ```
@@ -139,7 +139,7 @@ export type { PineconeConfig } from './types';
 Create `packages/adapter-pinecone/TECH_DEBT.md`:
 
 ```markdown
-# Technical Debt - @glyph/adapter-pinecone
+# Technical Debt - @vectororm/adapter-pinecone
 
 ## Filter Translation Limitations
 
@@ -229,10 +229,10 @@ export interface PineconeConfig {
 Create `packages/adapter-pinecone/src/pinecone-adapter.ts`:
 
 ```typescript
-import { VectorDBAdapter } from '@glyph/core';
-import type { VectorRecord, SearchResult } from '@glyph/core';
-import type { UniversalFilter } from '@glyph/core';
-import type { CollectionStats, MetadataUpdate, DistanceMetric } from '@glyph/core';
+import { VectorDBAdapter } from '@vectororm/core';
+import type { VectorRecord, SearchResult } from '@vectororm/core';
+import type { UniversalFilter } from '@vectororm/core';
+import type { CollectionStats, MetadataUpdate, DistanceMetric } from '@vectororm/core';
 import { Pinecone } from '@pinecone-database/pinecone';
 import type { PineconeConfig } from './types';
 
@@ -881,7 +881,7 @@ Create `packages/adapter-pinecone/tests/unit/vectors.test.ts`:
 ```typescript
 import { describe, it, expect, beforeEach } from 'vitest';
 import { PineconeAdapter } from '../../src/pinecone-adapter';
-import type { VectorRecord } from '@glyph/core';
+import type { VectorRecord } from '@vectororm/core';
 
 describe('PineconeAdapter - Vector Operations', () => {
   let adapter: PineconeAdapter;
@@ -1226,7 +1226,7 @@ Create `packages/adapter-pinecone/tests/integration/pinecone.integration.test.ts
 ```typescript
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import { PineconeAdapter } from '../../src/pinecone-adapter';
-import type { VectorRecord } from '@glyph/core';
+import type { VectorRecord } from '@vectororm/core';
 
 // Skip if no API key
 const hasApiKey = !!process.env.PINECONE_API_KEY;

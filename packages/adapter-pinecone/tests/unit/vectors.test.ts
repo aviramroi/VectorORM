@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { PineconeAdapter } from '../../src/pinecone-adapter';
-import type { VectorRecord } from '@glyph/core';
+import type { VectorRecord } from '@vectororm/core';
 import { Pinecone } from '@pinecone-database/pinecone';
 
 // Mock the Pinecone SDK

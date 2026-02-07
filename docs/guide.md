@@ -5,8 +5,8 @@ Glyph is a TypeScript-first vector ORM that brings database abstraction and ORM-
 ## Quick Start
 
 ```typescript
-import { RAGClient } from '@glyph/core';
-import { ChromaAdapter } from '@glyph/adapter-chroma';
+import { RAGClient } from '@vectororm/core';
+import { ChromaAdapter } from '@vectororm/adapter-chroma';
 
 // 1. Create a client
 const client = new RAGClient({
@@ -51,7 +51,7 @@ Glyph organizes vector metadata along three axes, each with a reserved prefix:
 Use `MetadataBuilder` to construct metadata with the correct field names:
 
 ```typescript
-import { MetadataBuilder } from '@glyph/core';
+import { MetadataBuilder } from '@vectororm/core';
 
 const metadata = new MetadataBuilder()
   .vertical({ docId: 'contract-123', partition: 'legal', source: '/docs/contract.pdf' })
@@ -93,7 +93,7 @@ Glyph includes built-in loaders for common formats:
 The `LoaderRegistry` auto-detects the right loader by file extension. Register custom loaders for additional formats:
 
 ```typescript
-import { LoaderRegistry } from '@glyph/core';
+import { LoaderRegistry } from '@vectororm/core';
 
 const registry = new LoaderRegistry();
 registry.register(new MyCustomLoader());
@@ -160,7 +160,7 @@ await client.retrieve('query', {
 The universal filter language works across all adapters:
 
 ```typescript
-import type { UniversalFilter } from '@glyph/core';
+import type { UniversalFilter } from '@vectororm/core';
 
 // Simple condition
 const filter: UniversalFilter = { field: 'year', op: 'gte', value: 2023 };
@@ -281,16 +281,16 @@ console.log(response.query);        // Original question
 
 | Package | Database | Install |
 |---------|----------|---------|
-| `@glyph/adapter-chroma` | ChromaDB | `npm install @glyph/adapter-chroma` |
-| `@glyph/adapter-pinecone` | Pinecone | `npm install @glyph/adapter-pinecone` |
-| `@glyph/adapter-turbopuffer` | Turbopuffer | `npm install @glyph/adapter-turbopuffer` |
+| `@vectororm/adapter-chroma` | ChromaDB | `npm install @vectororm/adapter-chroma` |
+| `@vectororm/adapter-pinecone` | Pinecone | `npm install @vectororm/adapter-pinecone` |
+| `@vectororm/adapter-turbopuffer` | Turbopuffer | `npm install @vectororm/adapter-turbopuffer` |
 
 ### Writing a Custom Adapter
 
 Extend `VectorDBAdapter` and implement all abstract methods:
 
 ```typescript
-import { VectorDBAdapter } from '@glyph/core';
+import { VectorDBAdapter } from '@vectororm/core';
 
 class MyAdapter extends VectorDBAdapter {
   async connect(): Promise<void> { /* ... */ }
@@ -315,7 +315,7 @@ class MyAdapter extends VectorDBAdapter {
 Implement `Embedder` for custom embedding models:
 
 ```typescript
-import { Embedder } from '@glyph/core';
+import { Embedder } from '@vectororm/core';
 
 class OpenAIEmbedder extends Embedder {
   constructor() { super(); }
@@ -329,7 +329,7 @@ class OpenAIEmbedder extends Embedder {
 Implement `LLMClient` for custom LLM providers:
 
 ```typescript
-import { LLMClient } from '@glyph/core';
+import { LLMClient } from '@vectororm/core';
 
 class OpenAIClient extends LLMClient {
   constructor() { super(); }

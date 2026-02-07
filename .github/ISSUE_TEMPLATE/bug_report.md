@@ -27,6 +27,6 @@ What actually happened. Include error messages or stack traces if applicable.
 ## Environment
 
 - **Node.js version**:
-- **@glyph/core version**:
+- **@vectororm/core version**:
 - **Adapter** (if applicable):
 - **OS**:

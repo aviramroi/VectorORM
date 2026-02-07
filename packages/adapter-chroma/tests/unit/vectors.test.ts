@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { ChromaAdapter } from '../../src/chroma-adapter';
-import type { VectorRecord, MetadataUpdate } from '@glyph/core';
+import type { VectorRecord, MetadataUpdate } from '@vectororm/core';
 
 describe('ChromaAdapter - Vector Operations', () => {
   let adapter: ChromaAdapter;

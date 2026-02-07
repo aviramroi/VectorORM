@@ -1,6 +1,6 @@
-# @glyph/adapter-chroma
+# @vectororm/adapter-chroma
 
-[![npm](https://img.shields.io/npm/v/@glyph/adapter-chroma)](https://www.npmjs.com/package/@glyph/adapter-chroma)
+[![npm](https://img.shields.io/npm/v/@vectororm/adapter-chroma)](https://www.npmjs.com/package/@vectororm/adapter-chroma)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 [ChromaDB](https://www.trychroma.com/) adapter for [Glyph VectorORM](https://github.com/aviramroi/VectorORM).
@@ -8,7 +8,7 @@
 ## Installation
 
 ```bash
-npm install @glyph/core @glyph/adapter-chroma
+npm install @vectororm/core @vectororm/adapter-chroma
 ```
 
 ## Prerequisites
@@ -24,7 +24,7 @@ docker run -p 8000:8000 chromadb/chroma
 ### Standalone Adapter
 
 ```typescript
-import { ChromaAdapter } from '@glyph/adapter-chroma';
+import { ChromaAdapter } from '@vectororm/adapter-chroma';
 
 const adapter = new ChromaAdapter({
   host: 'localhost',
@@ -56,8 +56,8 @@ const results = await adapter.search('my-docs', queryVector, {
 ### With RAGClient
 
 ```typescript
-import { RAGClient } from '@glyph/core';
-import { ChromaAdapter } from '@glyph/adapter-chroma';
+import { RAGClient } from '@vectororm/core';
+import { ChromaAdapter } from '@vectororm/adapter-chroma';
 
 const client = new RAGClient({
   adapter: new ChromaAdapter({ host: 'localhost', port: 8000 }),

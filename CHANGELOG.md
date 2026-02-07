@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 Initial release of Glyph VectorORM.
 
-### Core (`@glyph/core`)
+### Core (`@vectororm/core`)
 
 - **Type System** — VectorRecord, SearchResult, MetadataBuilder with three metadata axes (Vertical, Horizontal, Structural)
 - **VectorDBAdapter** — Abstract base class for database-agnostic vector operations
@@ -20,9 +20,9 @@ Initial release of Glyph VectorORM.
 
 ### Adapters
 
-- **`@glyph/adapter-chroma`** — ChromaDB adapter with full CRUD, search, filter translation, and iteration
-- **`@glyph/adapter-pinecone`** — Pinecone adapter with namespace support, pagination, and filter translation
-- **`@glyph/adapter-turbopuffer`** — Turbopuffer adapter with full vector operations and filter translation
+- **`@vectororm/adapter-chroma`** — ChromaDB adapter with full CRUD, search, filter translation, and iteration
+- **`@vectororm/adapter-pinecone`** — Pinecone adapter with namespace support, pagination, and filter translation
+- **`@vectororm/adapter-turbopuffer`** — Turbopuffer adapter with full vector operations and filter translation
 
 ### Documentation
 

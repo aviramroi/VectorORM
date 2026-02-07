@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { PineconeAdapter } from '../../src/pinecone-adapter';
-import type { UniversalFilter } from '@glyph/core';
+import type { UniversalFilter } from '@vectororm/core';
 
 describe('PineconeAdapter - Filter Translation', () => {
   let adapter: PineconeAdapter;

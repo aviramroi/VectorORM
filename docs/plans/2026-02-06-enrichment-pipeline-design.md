@@ -496,7 +496,7 @@ Test with real vector databases (skip if no API keys):
 
 ## Package Structure
 
-All enrichment code lives in `@glyph/core`:
+All enrichment code lives in `@vectororm/core`:
 
 ```
 packages/core/src/

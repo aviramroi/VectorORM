@@ -1,4 +1,4 @@
-# Technical Debt - @glyph/adapter-turbopuffer
+# Technical Debt - @vectororm/adapter-turbopuffer
 
 ## Filter Translation Limitations
 

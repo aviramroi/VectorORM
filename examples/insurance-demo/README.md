@@ -80,7 +80,7 @@ const llm = new OpenAIClient({ apiKey: process.env.OPENAI_API_KEY, model: 'gpt-4
 Replace ChromaAdapter with any Glyph adapter:
 
 ```typescript
-import { PineconeAdapter } from '@glyph/adapter-pinecone';
+import { PineconeAdapter } from '@vectororm/adapter-pinecone';
 
 const adapter = new PineconeAdapter({ apiKey: process.env.PINECONE_API_KEY });
 ```

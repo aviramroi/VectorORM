@@ -6,7 +6,7 @@ import {
   type CollectionStats,
   type MetadataUpdate,
   type DistanceMetric,
-} from '@glyph/core';
+} from '@vectororm/core';
 import { ChromaClient, type Collection } from 'chromadb';
 import type { ChromaConfig } from './types.js';
 

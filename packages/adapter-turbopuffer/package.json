@@ -1,5 +1,5 @@
 {
-  "name": "@glyph/adapter-turbopuffer",
+  "name": "@vectororm/adapter-turbopuffer",
   "version": "0.1.0",
   "description": "Turbopuffer adapter for Glyph VectorORM",
   "author": "Aviram Roisman",
@@ -35,7 +35,7 @@
     "test:integration": "vitest run --config vitest.integration.config.ts"
   },
   "dependencies": {
-    "@glyph/core": "*"
+    "@vectororm/core": "*"
   },
   "devDependencies": {
     "@types/node": "^20.10.0",
@@ -44,7 +44,7 @@
     "vitest": "^1.0.0"
   },
   "peerDependencies": {
-    "@glyph/core": "^0.1.0"
+    "@vectororm/core": "^0.1.0"
   },
   "keywords": [
     "glyph",

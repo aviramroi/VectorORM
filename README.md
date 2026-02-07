@@ -19,20 +19,20 @@ A TypeScript-first vector ORM that brings database abstraction and ORM-like patt
 
 | Package | Description | npm |
 |---------|-------------|-----|
-| [`@glyph/core`](packages/core) | Core abstractions, ingestion, enrichment, query, and RAGClient | `npm install @glyph/core` |
-| [`@glyph/adapter-chroma`](packages/adapter-chroma) | ChromaDB adapter | `npm install @glyph/adapter-chroma` |
-| [`@glyph/adapter-pinecone`](packages/adapter-pinecone) | Pinecone adapter | `npm install @glyph/adapter-pinecone` |
-| [`@glyph/adapter-turbopuffer`](packages/adapter-turbopuffer) | Turbopuffer adapter | `npm install @glyph/adapter-turbopuffer` |
+| [`@vectororm/core`](packages/core) | Core abstractions, ingestion, enrichment, query, and RAGClient | `npm install @vectororm/core` |
+| [`@vectororm/adapter-chroma`](packages/adapter-chroma) | ChromaDB adapter | `npm install @vectororm/adapter-chroma` |
+| [`@vectororm/adapter-pinecone`](packages/adapter-pinecone) | Pinecone adapter | `npm install @vectororm/adapter-pinecone` |
+| [`@vectororm/adapter-turbopuffer`](packages/adapter-turbopuffer) | Turbopuffer adapter | `npm install @vectororm/adapter-turbopuffer` |
 
 ## Quick Start
 
 ```bash
-npm install @glyph/core @glyph/adapter-chroma
+npm install @vectororm/core @vectororm/adapter-chroma
 ```
 
 ```typescript
-import { RAGClient } from '@glyph/core';
-import { ChromaAdapter } from '@glyph/adapter-chroma';
+import { RAGClient } from '@vectororm/core';
+import { ChromaAdapter } from '@vectororm/adapter-chroma';
 
 const client = new RAGClient({
   adapter: new ChromaAdapter({ host: 'localhost', port: 8000 }),

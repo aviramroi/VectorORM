@@ -1,5 +1,5 @@
 {
-  "name": "@glyph/adapter-pinecone",
+  "name": "@vectororm/adapter-pinecone",
   "version": "0.1.0",
   "description": "Pinecone adapter for Glyph VectorORM",
   "author": "Aviram Roisman",
@@ -35,7 +35,7 @@
     "test:integration": "vitest run --config vitest.integration.config.ts"
   },
   "dependencies": {
-    "@glyph/core": "*",
+    "@vectororm/core": "*",
     "@pinecone-database/pinecone": "^2.0.0"
   },
   "devDependencies": {
@@ -45,7 +45,7 @@
     "vitest": "^1.0.0"
   },
   "peerDependencies": {
-    "@glyph/core": "^0.1.0"
+    "@vectororm/core": "^0.1.0"
   },
   "keywords": [
     "glyph",

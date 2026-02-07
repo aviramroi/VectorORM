@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { ChromaAdapter } from '../../src/chroma-adapter';
-import type { UniversalFilter } from '@glyph/core';
+import type { UniversalFilter } from '@vectororm/core';
 
 describe('ChromaAdapter - Filter Translation', () => {
   let adapter: ChromaAdapter;

@@ -11,8 +11,8 @@
     "query": "tsx src/query.ts"
   },
   "dependencies": {
-    "@glyph/core": "^0.1.0",
-    "@glyph/adapter-chroma": "^0.1.0"
+    "@vectororm/core": "^0.1.0",
+    "@vectororm/adapter-chroma": "^0.1.0"
   },
   "devDependencies": {
     "tsx": "^4.7.0",

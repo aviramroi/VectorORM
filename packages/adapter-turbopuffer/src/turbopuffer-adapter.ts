@@ -6,7 +6,7 @@ import {
   type CollectionStats,
   type MetadataUpdate,
   type DistanceMetric,
-} from '@glyph/core';
+} from '@vectororm/core';
 import type { TurbopufferConfig } from './types.js';
 
 /**

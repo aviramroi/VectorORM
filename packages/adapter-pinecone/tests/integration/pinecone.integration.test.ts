@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import { PineconeAdapter } from '../../src/pinecone-adapter';
-import type { VectorRecord } from '@glyph/core';
+import type { VectorRecord } from '@vectororm/core';
 
 // Skip if no API key
 const hasApiKey = !!process.env.PINECONE_API_KEY;

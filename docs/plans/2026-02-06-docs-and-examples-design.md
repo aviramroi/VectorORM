@@ -64,7 +64,7 @@ examples/insurance-demo/
 └── .env.example
 ```
 
-Uses `@glyph/core` + `@glyph/adapter-chroma` as real dependencies. README explains setup (Chroma via Docker), what it demonstrates, and expected output.
+Uses `@vectororm/core` + `@vectororm/adapter-chroma` as real dependencies. README explains setup (Chroma via Docker), what it demonstrates, and expected output.
 
 ## Out of Scope
 

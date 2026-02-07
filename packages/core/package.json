@@ -1,5 +1,5 @@
 {
-  "name": "@glyph/core",
+  "name": "@vectororm/core",
   "version": "0.1.0",
   "description": "Core abstractions for Glyph VectorORM — adapters, ingestion, enrichment, query, and RAGClient",
   "author": "Aviram Roisman",

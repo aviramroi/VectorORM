@@ -16,8 +16,8 @@ import { MockLLM } from '../packages/core/src/llm/mock-llm';
 import { SimpleEmbedder } from './helpers/mock-embedder';
 
 // In a real app:
-//   import { RAGClient } from '@glyph/core';
-//   import { PineconeAdapter } from '@glyph/adapter-pinecone';
+//   import { RAGClient } from '@vectororm/core';
+//   import { PineconeAdapter } from '@vectororm/adapter-pinecone';
 
 import { InMemoryAdapter } from './helpers/mock-adapter';
 
@@ -27,7 +27,7 @@ async function main() {
   // ── Configuration ─────────────────────────────────────────────────────
   // Real Pinecone configuration:
   //
-  //   import { PineconeAdapter } from '@glyph/adapter-pinecone';
+  //   import { PineconeAdapter } from '@vectororm/adapter-pinecone';
   //
   //   const adapter = new PineconeAdapter({
   //     apiKey: process.env.PINECONE_API_KEY!,

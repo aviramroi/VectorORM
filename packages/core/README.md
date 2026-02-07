@@ -1,6 +1,6 @@
-# @glyph/core
+# @vectororm/core
 
-[![npm](https://img.shields.io/npm/v/@glyph/core)](https://www.npmjs.com/package/@glyph/core)
+[![npm](https://img.shields.io/npm/v/@vectororm/core)](https://www.npmjs.com/package/@vectororm/core)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 Core package for [Glyph VectorORM](https://github.com/aviramroi/VectorORM) — a TypeScript-first vector ORM with Vertical and Horizontal RAG.
@@ -10,14 +10,14 @@ Includes the abstract adapter base class, universal filter language, metadata bu
 ## Installation
 
 ```bash
-npm install @glyph/core
+npm install @vectororm/core
 ```
 
 ## Usage
 
 ```typescript
-import { RAGClient, MetadataBuilder, KeywordThemeClassifier } from '@glyph/core';
-import { ChromaAdapter } from '@glyph/adapter-chroma';
+import { RAGClient, MetadataBuilder, KeywordThemeClassifier } from '@vectororm/core';
+import { ChromaAdapter } from '@vectororm/adapter-chroma';
 
 // Create client with your adapter, embedder, and optional LLM
 const client = new RAGClient({

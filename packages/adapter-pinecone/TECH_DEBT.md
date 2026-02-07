@@ -1,4 +1,4 @@
-# Technical Debt - @glyph/adapter-pinecone
+# Technical Debt - @vectororm/adapter-pinecone
 
 ## Filter Translation Limitations
 
