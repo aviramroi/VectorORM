@@ -98,7 +98,7 @@ export class TurbopufferAdapter extends VectorDBAdapter {
   async connect(): Promise<void> {
     try {
       // Verify connection by listing namespaces
-      await this.request('GET', '/v2/namespaces');
+      await this.request('GET', '/v1/namespaces');
       this.connected = true;
     } catch (error) {
       throw new Error(
@@ -143,7 +143,7 @@ export class TurbopufferAdapter extends VectorDBAdapter {
         upsert_rows: [{
           id: '__init__',
           vector: new Array(dimension).fill(0),
-          attributes: { __init__: true }
+          __init__: true,
         }],
         distance_metric: distanceMetric,
       });
@@ -182,7 +182,7 @@ export class TurbopufferAdapter extends VectorDBAdapter {
     }
 
     try {
-      const response = await this.request('GET', '/v2/namespaces');
+      const response = await this.request('GET', '/v1/namespaces');
       const namespaces = response.namespaces || [];
       return namespaces.some((ns: any) => ns.name === name);
     } catch (error) {
@@ -199,13 +199,12 @@ export class TurbopufferAdapter extends VectorDBAdapter {
     }
 
     try {
-      // Use query with limit 0 to get aggregation stats
+      // Use aggregation query to get document count
       const result = await this.request('POST', `/v2/namespaces/${name}/query`, {
-        top_k: 0,
-        aggregate_by: { Count: '*' },
+        aggregate_by: { count: ['Count'] },
       });
 
-      const vectorCount = result.aggregations?.Count ?? 0;
+      const vectorCount = result.aggregations?.count ?? 0;
 
       // Get dimension from stored metrics or estimate from a sample vector
       let dimension = this.namespaceMetrics.get(name)?.dimension ?? 0;
@@ -215,7 +214,7 @@ export class TurbopufferAdapter extends VectorDBAdapter {
         // Query one vector to get dimension
         const sample = await this.request('POST', `/v2/namespaces/${name}/query`, {
           top_k: 1,
-          include_vectors: true,
+          include_attributes: ['vector'],
         });
 
         if (sample.rows && sample.rows.length > 0) {
@@ -286,7 +285,7 @@ export class TurbopufferAdapter extends VectorDBAdapter {
         const result = await this.request('POST', `/v2/namespaces/${collection}/query`, {
           top_k: ids.length,
           filters: ['id', 'In', ids],
-          include_vectors: true,
+          include_attributes: true,  // all attributes including vector
         });
 
         if (result.rows) {
@@ -393,11 +392,14 @@ export class TurbopufferAdapter extends VectorDBAdapter {
         ? this.translateFilter(options.filter)
         : undefined;
 
+      // include_attributes: true returns all attrs; omitting returns only id
+      const includeAttrs = options?.includeMetadata !== false || options?.includeValues;
+
       const result = await this.request('POST', `/v2/namespaces/${collection}/query`, {
         rank_by: ['vector', 'ANN', queryVector],
         top_k: options?.topK || 10,
         filters: turbopufferFilter,
-        include_vectors: options?.includeValues || false,
+        include_attributes: includeAttrs ? true : undefined,
       });
 
       const records: VectorRecord[] = [];
@@ -520,8 +522,8 @@ export class TurbopufferAdapter extends VectorDBAdapter {
         const result = await this.request('POST', `/v2/namespaces/${collection}/query`, {
           top_k: batchSize,
           filters,
-          include_vectors: true,
-          rank_by: ['id', 'Asc'],
+          include_attributes: true,  // all attributes including vector
+          rank_by: ['id', 'asc'],
         });
 
         if (result.rows && result.rows.length > 0) {
