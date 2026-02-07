@@ -1,5 +1,14 @@
 # @vectororm/adapter-turbopuffer
 
+## 1.0.1
+
+### Patch Changes
+
+- [`eb7111b`](https://github.com/aviramroi/VectorORM/commit/eb7111b6cb9744594213113ae88dda853fbfdbd6) Thanks [@aviramroi](https://github.com/aviramroi)! - Fix Turbopuffer adapter to work with real API: correct v1/v2 endpoint versions, fix attribute format in upsert, use include_attributes instead of include_vectors, fix aggregation query format, and fix iterate rank_by casing
+
+- Updated dependencies []:
+  - @vectororm/core@1.0.1
+
 ## 1.0.0
 
 ### Minor Changes

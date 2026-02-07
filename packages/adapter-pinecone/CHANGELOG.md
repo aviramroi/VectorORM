@@ -1,5 +1,12 @@
 # @vectororm/adapter-pinecone
 
+## 1.0.1
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @vectororm/core@1.0.1
+
 ## 1.0.0
 
 ### Patch Changes

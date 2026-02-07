@@ -1,6 +1,6 @@
 {
   "name": "@vectororm/adapter-chroma",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "ChromaDB adapter for VectorORM",
   "author": "Aviram Roisman",
   "license": "Apache-2.0",
@@ -48,7 +48,7 @@
     "vitest": "^1.0.0"
   },
   "peerDependencies": {
-    "@vectororm/core": "^1.0.0"
+    "@vectororm/core": "^1.0.1"
   },
   "keywords": [
     "vectororm",
