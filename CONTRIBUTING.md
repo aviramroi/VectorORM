@@ -1,6 +1,12 @@
 # Contributing to VectorORM
 
-Thank you for your interest in contributing! This document provides guidelines for contributing to the project.
+Thank you for your interest in contributing! Whether you're fixing a bug, adding a new adapter, or improving docs — every contribution helps.
+
+## Where to Start
+
+- Browse [issues labeled `good first issue`](https://github.com/aviramroi/VectorORM/labels/good%20first%20issue) for beginner-friendly tasks
+- Check [issues labeled `help wanted`](https://github.com/aviramroi/VectorORM/labels/help%20wanted) for features that need contributors
+- Comment on an issue to claim it before starting work
 
 ## Getting Started
 
@@ -41,7 +47,7 @@ Thank you for your interest in contributing! This document provides guidelines f
 
 ### Adding a Changeset
 
-Every PR that changes runtime code or fixes a bug should include a changeset. This describes what changed and the semver impact:
+Every PR that changes runtime code or fixes a bug should include a changeset:
 
 ```bash
 npm run changeset
@@ -52,13 +58,13 @@ You'll be prompted to:
 2. Choose the bump type (`patch` for fixes, `minor` for features, `major` for breaking changes)
 3. Write a short summary of the change
 
-This creates a file in `.changeset/` — commit it with your PR. When the PR is merged, a bot will open a "Version Packages" PR that bumps versions and updates changelogs.
+This creates a file in `.changeset/` — commit it with your PR. When merged, the release workflow automatically versions and publishes to npm.
 
 **When to skip a changeset:** Pure docs changes, CI tweaks, or test-only changes don't need one.
 
 ### Commit Style
 
-We use [Conventional Commits](https://www.conventionalcommits.org/), enforced by commitlint. A pre-commit hook also runs type checking via lint-staged.
+We use [Conventional Commits](https://www.conventionalcommits.org/), enforced by commitlint via a git hook.
 
 **Format:** `type(scope): description`
 
@@ -67,11 +73,10 @@ We use [Conventional Commits](https://www.conventionalcommits.org/), enforced by
 **Scopes:** `core`, `adapter-chroma`, `adapter-pinecone`, `adapter-turbopuffer`, `deps`, `ci`, `release` (or omit scope)
 
 ```
-feat(core): add new filter operator
+feat(core): add NOT compound filter
 fix(adapter-chroma): handle empty search results
 docs: update API guide with enrichment examples
 test(core): add edge case tests for PDF loader
-chore(deps): update dependencies
 ```
 
 ### Code Style
@@ -114,13 +119,28 @@ packages/
 
 ## Adding a New Adapter
 
+This is a great way to contribute! See [issue #2](https://github.com/aviramroi/VectorORM/issues/2) (Qdrant) or [issue #6](https://github.com/aviramroi/VectorORM/issues/6) (pgvector) for open adapter requests.
+
 1. Create `packages/adapter-<name>/` with the standard package structure
 2. Extend `VectorDBAdapter` from `@vectororm/core`
 3. Implement all abstract methods
 4. Add filter translation for the target database
-5. Write tests covering all operations
+5. Write unit tests covering all operations
 6. Add a README with installation and usage instructions
-7. Add an example script in `examples/`
+7. Add an example in `cookbooks/`
+
+Use any existing adapter as a template — `adapter-turbopuffer` is the simplest.
+
+## Adding a New Embedder or LLM Client
+
+Same pattern as adapters:
+
+1. Create `packages/embedder-<name>/` or `packages/llm-<name>/`
+2. Extend the abstract base class (`Embedder` or `LLMClient`) from `@vectororm/core`
+3. Use `fetch` directly — avoid SDK dependencies to keep packages lightweight
+4. Accept API keys via constructor config or environment variables
+5. Unit tests with mocked HTTP responses
+6. README with installation and usage
 
 ## Reporting Issues
 
